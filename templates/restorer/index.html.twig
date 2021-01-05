@@ -1,0 +1,43 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Restorer index{% endblock %}
+
+{% block body %}
+    <h1>Restorer index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Email</th>
+                <th>Roles</th>
+                <th>Password</th>
+                <th>RestaurantName</th>
+                <th>Image</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for restorer in restorers %}
+            <tr>
+                <td>{{ restorer.id }}</td>
+                <td>{{ restorer.email }}</td>
+                <td>{{ restorer.roles ? restorer.roles|json_encode : '' }}</td>
+                <td>{{ restorer.password }}</td>
+                <td>{{ restorer.restaurantName }}</td>
+                <td>{{ restorer.image }}</td>
+                <td>
+                    <a href="{{ path('restorer_show', {'id': restorer.id}) }}">show</a>
+                    <a href="{{ path('restorer_edit', {'id': restorer.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="7">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('restorer_new') }}">Create new</a>
+{% endblock %}

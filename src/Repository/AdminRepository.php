@@ -2,7 +2,7 @@
 
 namespace App\Repository;
 
-use App\Entity\Restorer;
+use App\Entity\Admin;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Component\Security\Core\Exception\UnsupportedUserException;
@@ -10,16 +10,16 @@ use Symfony\Component\Security\Core\User\PasswordUpgraderInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
 
 /**
- * @method Restorer|null find($id, $lockMode = null, $lockVersion = null)
- * @method Restorer|null findOneBy(array $criteria, array $orderBy = null)
- * @method Restorer[]    findAll()
- * @method Restorer[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
+ * @method Admin|null find($id, $lockMode = null, $lockVersion = null)
+ * @method Admin|null findOneBy(array $criteria, array $orderBy = null)
+ * @method Admin[]    findAll()
+ * @method Admin[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
  */
-class RestorerRepository extends ServiceEntityRepository implements PasswordUpgraderInterface
+class AdminRepository extends ServiceEntityRepository implements PasswordUpgraderInterface
 {
     public function __construct(ManagerRegistry $registry)
     {
-        parent::__construct($registry, Restorer::class);
+        parent::__construct($registry, Admin::class);
     }
 
     /**
@@ -27,7 +27,7 @@ class RestorerRepository extends ServiceEntityRepository implements PasswordUpgr
      */
     public function upgradePassword(UserInterface $user, string $newEncodedPassword): void
     {
-        if (!$user instanceof Restorer) {
+        if (!$user instanceof Admin) {
             throw new UnsupportedUserException(sprintf('Instances of "%s" are not supported.', \get_class($user)));
         }
 
@@ -37,15 +37,15 @@ class RestorerRepository extends ServiceEntityRepository implements PasswordUpgr
     }
 
     // /**
-    //  * @return Restorer[] Returns an array of Restorer objects
+    //  * @return Admin[] Returns an array of Admin objects
     //  */
     /*
     public function findByExampleField($value)
     {
-        return $this->createQueryBuilder('r')
-            ->andWhere('r.exampleField = :val')
+        return $this->createQueryBuilder('a')
+            ->andWhere('a.exampleField = :val')
             ->setParameter('val', $value)
-            ->orderBy('r.id', 'ASC')
+            ->orderBy('a.id', 'ASC')
             ->setMaxResults(10)
             ->getQuery()
             ->getResult()
@@ -54,10 +54,10 @@ class RestorerRepository extends ServiceEntityRepository implements PasswordUpgr
     */
 
     /*
-    public function findOneBySomeField($value): ?Restorer
+    public function findOneBySomeField($value): ?Admin
     {
-        return $this->createQueryBuilder('r')
-            ->andWhere('r.exampleField = :val')
+        return $this->createQueryBuilder('a')
+            ->andWhere('a.exampleField = :val')
             ->setParameter('val', $value)
             ->getQuery()
             ->getOneOrNullResult()
