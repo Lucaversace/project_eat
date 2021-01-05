@@ -26,9 +26,9 @@ class IndexController extends AbstractController
      */
     public function plat(PlatRepository $platRepository): Response
     {
-        $plat = $platRepository;
+        $plats = $platRepository->findAll();
         return $this->render('index/index.html.twig', [
-            'plat' => $plat,
+            'plats' => $plats,
         ]);
     }
     
