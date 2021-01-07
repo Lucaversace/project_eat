@@ -16,7 +16,7 @@ use Symfony\Component\Routing\Annotation\Route;
 class UserClientController extends AbstractController
 {
     /**
-     * @Route("/", name="user_client_index", methods={"GET"})
+     * @Route("/users", name="user_client_index", methods={"GET"})
      */
     public function index(UserClientRepository $userClientRepository): Response
     {
@@ -28,7 +28,7 @@ class UserClientController extends AbstractController
 
 
     /**
-     * @Route("/{id}", name="user_client_show", methods={"GET"})
+     * @Route("/show/{id}", name="user_client_show", methods={"GET"})
      */
     public function show(UserClient $userClient): Response
     {
@@ -58,7 +58,7 @@ class UserClientController extends AbstractController
     }
 
     /**
-     * @Route("/{id}", name="user_client_delete", methods={"DELETE"})
+     * @Route("/delete/{id}", name="user_client_delete", methods={"DELETE"})
      */
     public function delete(Request $request, UserClient $userClient): Response
     {

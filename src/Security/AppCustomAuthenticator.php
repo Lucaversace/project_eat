@@ -96,8 +96,21 @@ class AppCustomAuthenticator extends AbstractFormLoginAuthenticator implements P
             return new RedirectResponse($targetPath);
         }
 
-        var_dump($request->getSession());
-        return new RedirectResponse($this->urlGenerator->generate('some_route'));
+        $user = $token->getUser();
+        $role = $user->getRoles();
+
+        switch ($role[0]) {
+            case "ROLE_ADMIN":
+                return new RedirectResponse($this->urlGenerator->generate('admin'));
+                break;
+            case "ROLE_RESTORER":
+                return new RedirectResponse($this->urlGenerator->generate('restorer_index'));
+                break;
+            case "ROLE_USER":
+                return new RedirectResponse($this->urlGenerator->generate('user_client_index'));
+                break;
+        }
+
         throw new \Exception('TODO: provide a valid redirect inside '.__FILE__);
     }
 
