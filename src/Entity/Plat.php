@@ -38,9 +38,11 @@ class Plat
     private $image;
 
     /**
-     * @ORM\ManyToOne(targetEntity=Restaurant::class, inversedBy="plats")
+     * @ORM\ManyToOne(targetEntity=Restorer::class, inversedBy="plats")
      */
-    private $id_restaurant;
+    private $restaurant;
+
+
 
     public function getId(): ?int
     {
@@ -95,15 +97,16 @@ class Plat
         return $this;
     }
 
-    public function getIdRestaurant(): ?Restaurant
+    public function getRestaurant(): ?Restorer
     {
-        return $this->id_restaurant;
+        return $this->restaurant;
     }
 
-    public function setIdRestaurant(?Restaurant $id_restaurant): self
+    public function setRestaurant(?Restorer $restaurant): self
     {
-        $this->id_restaurant = $id_restaurant;
+        $this->restaurant = $restaurant;
 
         return $this;
     }
+
 }
