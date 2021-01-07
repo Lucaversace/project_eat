@@ -1,0 +1,13 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Edit Restorer{% endblock %}
+
+{% block body %}
+    <h1>Edit Restorer</h1>
+
+    {{ include('restorer/_form.html.twig', {'button_label': 'Update'}) }}
+
+    <a href="{{ path('restorer_index') }}">back to list</a>
+
+    {{ include('restorer/_delete_form.html.twig') }}
+{% endblock %}

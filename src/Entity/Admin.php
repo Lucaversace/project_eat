@@ -2,18 +2,14 @@
 
 namespace App\Entity;
 
-use App\Repository\UserRepository;
+use App\Repository\AdminRepository;
 use Doctrine\ORM\Mapping as ORM;
-use Doctrine\ORM\Mapping\MappedSuperclass;
 use Symfony\Component\Security\Core\User\UserInterface;
 
 /**
- * @ORM\Entity()
- * @ORM\InheritanceType("JOINED")
- * @ORM\DiscriminatorColumn(name="type", type="string")
- * @ORM\DiscriminatorMap({"restorer"="Restorer", "userclient"="UserClient", "admin"="Admin"})
+ * @ORM\Entity(repositoryClass=AdminRepository::class)
  */
-abstract class User implements UserInterface
+class Admin extends User
 {
     /**
      * @ORM\Id
@@ -37,12 +33,6 @@ abstract class User implements UserInterface
      * @ORM\Column(type="string")
      */
     private $password;
-
-    /**
-     * @ORM\OneToOne(targetEntity=Address::class, cascade={"persist", "remove"})
-     * @ORM\JoinColumn(nullable=false)
-     */
-    private $address;
 
     public function getId(): ?int
     {
@@ -78,7 +68,7 @@ abstract class User implements UserInterface
     {
         $roles = $this->roles;
         // guarantee every user at least has ROLE_USER
-        /*$roles[] = 'ROLE_USER';*/
+        $roles[] = 'ROLE_USER';
 
         return array_unique($roles);
     }
@@ -120,17 +110,5 @@ abstract class User implements UserInterface
     {
         // If you store any temporary, sensitive data on the user, clear it here
         // $this->plainPassword = null;
-    }
-
-    public function getAddress(): ?Address
-    {
-        return $this->address;
-    }
-
-    public function setAddress(Address $address): self
-    {
-        $this->address = $address;
-
-        return $this;
     }
 }

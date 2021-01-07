@@ -1,0 +1,11 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}New Restorer{% endblock %}
+
+{% block body %}
+    <h1>Create new Restorer</h1>
+
+    {{ include('restorer/_form.html.twig') }}
+
+    <a href="{{ path('restorer_index') }}">back to list</a>
+{% endblock %}
