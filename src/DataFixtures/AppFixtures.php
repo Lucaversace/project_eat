@@ -16,7 +16,7 @@ class AppFixtures extends Fixture
       $plat = new Plat();
       $plat
         ->setNom($faker->state())
-        ->setDescription($faker->text(70))
+        ->setDescription($faker->text(50))
         ->setImage($faker->imageUrl($width = 200, $height = 140))
         ->setPrice($faker->randomDigit());
       $manager->persist($plat);

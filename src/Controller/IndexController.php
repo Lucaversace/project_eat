@@ -32,4 +32,16 @@ class IndexController extends AbstractController
         ]);
     }
     
+    /**
+   * @Route("/restaurant/{restaurant_id}", name="restaurant")
+   */
+  public function plat_id(PlatRepository $platRepository): Response
+  {
+    return $this->render('article/index.html.twig', [
+      'controller_name' => 'IndexController',
+      'plats' => $platRepository
+    ]);
+  }
 }
+
+
