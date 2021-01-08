@@ -2,7 +2,9 @@
 
 namespace App\Controller;
 
+use App\Repository\PlatRepository;
 use App\Entity\Restorer;
+use App\Entity\Plat;
 use App\Entity\UserClient;
 use App\Form\RestorerType;
 use App\Form\UserClientType;
@@ -15,7 +17,7 @@ use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 class IndexController extends AbstractController
 {
     /**
-     * @Route("/", name="index")
+     * @Route("/index", name="index")
      */
     public function index(): Response
     {
@@ -23,6 +25,33 @@ class IndexController extends AbstractController
             'controller_name' => 'IndexController',
         ]);
     }
+    
+
+    /**
+     * @Route("/restaurant", name="restaurant")
+     */
+    public function plat(PlatRepository $platRepository): Response
+    {
+        $plats = $platRepository->findAll();
+        return $this->render('index/index.html.twig', [
+            'plats' => $plats,
+        ]);
+    }
+     
+    /**
+    * @Route("/restaurant/{id}", name="plat")
+    */
+   public function plat_id(Restorer $restorer): Response
+   {
+    $plats = $restorer->getPlats();
+    return $this->render('index/index.html.twig', [
+      'controller_name' => 'IndexController',
+      'plats' => $plats
+    ]);
+   }
+
+
+
 
     /**
      * @Route("/new/restorer", name="restorer_new", methods={"GET","POST"})
