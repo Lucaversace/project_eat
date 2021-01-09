@@ -1,10 +1,10 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Restaurant{% endblock %}
+{% block title %}{{restorer.restaurantName}}{% endblock %}
 
 
 {% block body %}
-
+<div>
     <div style="height:413px;">
         <div class="header-blue"  style="background: url(https://www.tourisme-verdun.com/media/thumbs/pexels-photo-67468-resto-02_banniere-petit_2500.jpg); ">
             <div class="row" style="margin-right: 0px;margin-left: 0px;">
@@ -17,11 +17,11 @@
         </div>
     </div>
     <h1 style="margin-left: 10px;font-family: Roboto, sans-serif;margin-bottom: 20px;">Nos plats</h1>
-    <div class="row">
+    <div class="row" style="margin-right: 0px;margin-left: 0px;">
 
 
     {% for dish in dishs %}
-        <div class="col d-flex justify-content-xl-center" style="border-width: 1px;border-color: rgb(0,0,0);height: 140px;width: 650px;max-width: 100%;margin-bottom: 30px;">
+        <div class="col d-flex justify-content-xl-center" style="border-width: 1px;border-color: rgb(0,0,0);height: 140px;width: 650px;margin-bottom: 30px;padding: 0px !important;">
         <a href="{{ path('cart_add', {'id': dish.id}) }}"  class="btn btn-primary" type="button" style="background: rgb(255,255,255);color: rgb(0,0,0);border-style: none;border-color: rgb(0,0,0);box-shadow: 0px 3px 5px rgba(0,0,0,0.2);">+</a>
             <div class="cadre" style="width: 312px;height: 140px;color: #212529;border: 1px solid rgba(0,0,0,0.12) ;">
                 <div class="d-xl-flex justify-content-xl-end" style="margin-top: 5px;">
@@ -33,5 +33,5 @@
             <div><img class="d-xl-flex" src={{dish.image}} style="width: 200px;height: 140px;" alt={{dish.nom}}></div>
         </div>
     {% endfor %}  
-
+</div>
 {% endblock %}
