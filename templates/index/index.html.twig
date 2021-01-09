@@ -2,11 +2,13 @@
 
 {% block title %}Restaurant 1 {% endblock %}
 
+
 {% block body %}
-<div style="height:413px;">
-        <div class="header-blue" {# style="background: url(&quot;assets/img/sushi.jpg&quot;) right; "#}>
+
+    <div style="height:413px;">
+        <div class="header-blue"  style="background: url(https://www.tourisme-verdun.com/media/thumbs/pexels-photo-67468-resto-02_banniere-petit_2500.jpg); ">
             <div class="row" style="margin-right: 0px;margin-left: 0px;">
-                <div class="col-md-6 col-lg-5 offset-lg-1" style="background-color: rgba(78,70,70,0.87);margin-top: 75px;margin-left: 0;margin-right: 20px;font-family: Roboto, sans-serif;padding-bottom: 15px;">
+                <div class="col-md-6 col-lg-5 offset-lg-1" style="background-color: rgba(78,70,70,0.87);margin-top: 75px;margin-left: 0;font-family: Roboto, sans-serif;padding-bottom: 15px;">
                     <h1 style="margin-top: 25px;margin-bottom: 25px;color: rgb(255,255,255);font-family: Roboto, sans-serif;margin-right: 1px;padding-left: 10px;">Nom du Restaurant</h1>
                     <p style="color: rgb(255,253,253);margin-bottom: 1px;padding-left: 10px;">Frais de livraison : 2.50€ • 7 minutes</p>
                     <p style="color: rgb(255,253,253);margin-bottom: 25px;padding-left: 10px;">Adresse du restaurant, CODE POSTAL, Ville, France.</p>
@@ -21,7 +23,7 @@
     {% for plat in plats %}
         <div class="col d-flex justify-content-xl-center" style="border-width: 1px;border-color: rgb(0,0,0);height: 140px;width: 650px;max-width: 100%;margin-bottom: 30px;"><button class="btn btn-primary" type="button" style="background: rgb(255,255,255);color: rgb(0,0,0);border-style: none;border-color: rgb(0,0,0);box-shadow: 0px 3px 5px rgba(0,0,0,0.2);">+</button>
             <div class="cadre" style="width: 312px;height: 140px;color: #212529;border: 1px solid rgba(0,0,0,0.12) ;">
-                <div class="d-xl-flex justify-content-xl-end" style="margin-right: 10px;margin-top: 5px;">
+                <div class="d-xl-flex justify-content-xl-end" style="margin-top: 5px;">
                     <p style="width: 300px;font-family: Roboto, sans-serif;margin: 0px;font-weight: bold;margin-left: 10px;">{{plat.nom}}</p>
                 </div>
                 <p style="width: 300px;font-family: Roboto, sans-serif;padding-top: 5px;padding-bottom: 5 px;margin-left: 10px;">{{plat.description}}<br></p>
@@ -88,5 +90,9 @@
         </div>
     </div>
  #}
+
+<footer>
+         {{ include ("layout/footer.html.twig") }}
+</footer>
 
 {% endblock %}

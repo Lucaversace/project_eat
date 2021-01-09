@@ -40,7 +40,7 @@ class AppFixtures extends Fixture
         ->setAddress($address);
       $manager->persist($restorer);
 
-      for ($j = 0; $j < 4; $j++) {
+      for ($j = 0; $j < 12; $j++) {
         $plat = new Plat();
         $plat
           ->setRestaurant($restorer)
