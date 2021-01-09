@@ -28,7 +28,7 @@ class IndexController extends AbstractController
     }
      
     /**
-    * @Route("/restaurant/{id}", name="dish")
+    * @Route("/Restaurant/{id}", name="dish")
     */
    public function dish_id($id, RestorerRepository $restorerRepository): Response
    {
@@ -42,7 +42,7 @@ class IndexController extends AbstractController
 
 
     /**
-     * @Route("/new/restorer", name="restorer_new", methods={"GET","POST"})
+     * @Route("/Restaurant/Inscription", name="restorer_new", methods={"GET","POST"})
      */
     public function newRestorer(Request $request, UserPasswordEncoderInterface $encoder): Response
     {
@@ -68,7 +68,7 @@ class IndexController extends AbstractController
     }
 
     /**
-     * @Route("/new/user", name="user_client_new", methods={"GET","POST"})
+     * @Route("/Inscription", name="user_client_new", methods={"GET","POST"})
      */
     public function newUser(Request $request, UserPasswordEncoderInterface $encoder): Response
     {

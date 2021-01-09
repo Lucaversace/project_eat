@@ -10,7 +10,7 @@ use Symfony\Component\Routing\Annotation\Route;
 class CartController extends AbstractController
 {
     /**
-     * @Route("/cart", name="cart_index")
+     * @Route("/Panier", name="cart_index")
      */
     public function index(CartService $cartService): Response
     {   
