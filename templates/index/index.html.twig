@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Restaurant 1 {% endblock %}
+{% block title %}Restaurant{% endblock %}
 
 
 {% block body %}
@@ -20,79 +20,18 @@
     <div class="row">
 
 
-    {% for plat in plats %}
-        <div class="col d-flex justify-content-xl-center" style="border-width: 1px;border-color: rgb(0,0,0);height: 140px;width: 650px;max-width: 100%;margin-bottom: 30px;"><button class="btn btn-primary" type="button" style="background: rgb(255,255,255);color: rgb(0,0,0);border-style: none;border-color: rgb(0,0,0);box-shadow: 0px 3px 5px rgba(0,0,0,0.2);">+</button>
+    {% for dish in dishs %}
+        <div class="col d-flex justify-content-xl-center" style="border-width: 1px;border-color: rgb(0,0,0);height: 140px;width: 650px;max-width: 100%;margin-bottom: 30px;">
+        <a href="{{ path('cart_add', {'id': dish.id}) }}"  class="btn btn-primary" type="button" style="background: rgb(255,255,255);color: rgb(0,0,0);border-style: none;border-color: rgb(0,0,0);box-shadow: 0px 3px 5px rgba(0,0,0,0.2);">+</a>
             <div class="cadre" style="width: 312px;height: 140px;color: #212529;border: 1px solid rgba(0,0,0,0.12) ;">
                 <div class="d-xl-flex justify-content-xl-end" style="margin-top: 5px;">
-                    <p style="width: 300px;font-family: Roboto, sans-serif;margin: 0px;font-weight: bold;margin-left: 10px;">{{plat.nom}}</p>
+                    <p style="width: 300px;font-family: Roboto, sans-serif;margin: 0px;font-weight: bold;margin-left: 10px;">{{dish.nom}}</p>
                 </div>
-                <p style="width: 300px;font-family: Roboto, sans-serif;padding-top: 5px;padding-bottom: 5 px;margin-left: 10px;">{{plat.description}}<br></p>
-                <p style="width: 300px;font-family: Roboto, sans-serif;margin: 0px;font-weight: bold;margin-left: 10px;">{{plat.price}} € <br></p>
+                <p style="width: 300px;font-family: Roboto, sans-serif;padding-top: 5px;padding-bottom: 5 px;margin-left: 10px;">{{dish.description}}<br></p>
+                <p style="width: 300px;font-family: Roboto, sans-serif;margin: 0px;font-weight: bold;margin-left: 10px;">{{dish.price}} € <br></p>
             </div>
-            <div><img class="d-xl-flex" src={{plat.image}} style="width: 200px;height: 140px;" alt={{plat.nom}}></div>
+            <div><img class="d-xl-flex" src={{dish.image}} style="width: 200px;height: 140px;" alt={{dish.nom}}></div>
         </div>
     {% endfor %}  
-
-{#         <div class="col d-flex justify-content-xl-center" style="border-width: 1px;border-color: rgb(0,0,0);height: 140px;width: 650px;max-width: 100%;margin-bottom: 30px;"><button class="btn btn-primary" type="button" style="background: rgb(255,255,255);color: rgb(0,0,0);border-style: none;border-color: rgb(0,0,0);box-shadow: 0px 3px 5px rgba(0,0,0,0.2);">+</button>
-            <div class="cadre" style="width: 312px;height: 140px;color: #212529;border: 1px solid rgba(0,0,0,0.12) ;">
-                <div class="d-xl-flex justify-content-xl-end" style="margin-right: 10px;margin-top: 5px;">
-                    <p style="width: 300px;font-family: Roboto, sans-serif;margin: 0px;font-weight: bold;margin-left: 10px;">Menu Sushi 1</p>
-                </div>
-                <p style="width: 300px;font-family: Roboto, sans-serif;padding-top: 5px;padding-bottom: 5 px;margin-left: 10px;">12 pièces - 6 sushis saumon, 6 sushis avocat. Servis avec du riz.<br></p>
-                <p style="width: 300px;font-family: Roboto, sans-serif;margin: 0px;font-weight: bold;margin-left: 10px;">12.90€<br></p>
-            </div>
-            <div><img class="d-xl-flex" src="assets/img/sushi%203.jpeg" style="width: 200px;height: 140px;"></div>
-        </div>
-
-        <div class="col d-flex justify-content-xl-center" style="border-width: 1px;border-color: rgb(0,0,0);height: 140px;width: 650px;max-width: 100%;margin-bottom: 30px;"><button class="btn btn-primary" type="button" style="background: rgb(255,255,255);color: rgb(0,0,0);border-style: none;border-color: rgb(0,0,0);box-shadow: 0px 3px 5px rgba(0,0,0,0.2);">+</button>
-            <div class="cadre" style="width: 312px;height: 140px;color: #212529;border: 1px solid rgba(0,0,0,0.12) ;">
-                <div class="d-xl-flex justify-content-xl-end" style="margin-right: 10px;margin-top: 5px;">
-                    <p style="width: 300px;font-family: Roboto, sans-serif;margin: 0px;font-weight: bold;margin-left: 10px;">Menu Sushi 1</p>
-                </div>
-                <p style="width: 300px;font-family: Roboto, sans-serif;padding-top: 5px;padding-bottom: 5 px;margin-left: 10px;">12 pièces - 6 sushis saumon, 6 sushis avocat. Servis avec du riz.<br></p>
-                <p style="width: 300px;font-family: Roboto, sans-serif;margin: 0px;font-weight: bold;margin-left: 10px;">12.90€<br></p>
-            </div>
-            <div><img class="d-xl-flex" src="assets/img/sushi%203.jpeg" style="width: 200px;height: 140px;"></div>
-        </div>
-    </div>
-
- 
-    <div class="row">
-        <div class="col d-flex justify-content-xl-center" style="border-width: 1px;border-color: rgb(0,0,0);height: 140px;width: 650px;max-width: 100%;margin-bottom: 30px;"><button class="btn btn-primary" type="button" style="background: rgb(255,255,255);color: rgb(0,0,0);border-style: none;border-color: rgb(0,0,0);box-shadow: 0px 3px 5px rgba(0,0,0,0.2);">+</button>
-            <div class="cadre" style="width: 312px;height: 140px;color: #212529;border: 1px solid rgba(0,0,0,0.12) ;">
-                <div class="d-xl-flex justify-content-xl-end" style="margin-right: 10px;margin-top: 5px;">
-                    <p style="width: 300px;font-family: Roboto, sans-serif;margin: 0px;font-weight: bold;margin-left: 10px;">Menu Sushi 1</p>
-                </div>
-                <p style="width: 300px;font-family: Roboto, sans-serif;padding-top: 5px;padding-bottom: 5 px;margin-left: 10px;">12 pièces - 6 sushis saumon, 6 sushis avocat. Servis avec du riz.<br></p>
-                <p style="width: 300px;font-family: Roboto, sans-serif;margin: 0px;font-weight: bold;margin-left: 10px;">12.90€<br></p>
-            </div>
-            <div><img class="d-xl-flex" src="assets/img/sushi%203.jpeg" style="width: 200px;height: 140px;"></div>
-        </div>
-        <div class="col d-flex justify-content-xl-center" style="border-width: 1px;border-color: rgb(0,0,0);height: 140px;width: 650px;max-width: 100%;margin-bottom: 30px;"><button class="btn btn-primary" type="button" style="background: rgb(255,255,255);color: rgb(0,0,0);border-style: none;border-color: rgb(0,0,0);box-shadow: 0px 3px 5px rgba(0,0,0,0.2);">+</button>
-            <div class="cadre" style="width: 312px;height: 140px;color: #212529;border: 1px solid rgba(0,0,0,0.12) ;">
-                <div class="d-xl-flex justify-content-xl-end" style="margin-right: 10px;margin-top: 5px;">
-                    <p style="width: 300px;font-family: Roboto, sans-serif;margin: 0px;font-weight: bold;margin-left: 10px;">Menu Sushi 1</p>
-                </div>
-                <p style="width: 300px;font-family: Roboto, sans-serif;padding-top: 5px;padding-bottom: 5 px;margin-left: 10px;">12 pièces - 6 sushis saumon, 6 sushis avocat. Servis avec du riz.<br></p>
-                <p style="width: 300px;font-family: Roboto, sans-serif;margin: 0px;font-weight: bold;margin-left: 10px;">12.90€<br></p>
-            </div>
-            <div><img class="d-xl-flex" src="assets/img/sushi%203.jpeg" style="width: 200px;height: 140px;"></div>
-        </div>
-        <div class="col d-flex justify-content-xl-center" style="border-width: 1px;border-color: rgb(0,0,0);height: 140px;width: 650px;max-width: 100%;margin-bottom: 30px;"><button class="btn btn-primary" type="button" style="background: rgb(255,255,255);color: rgb(0,0,0);border-style: none;border-color: rgb(0,0,0);box-shadow: 0px 3px 5px rgba(0,0,0,0.2);">+</button>
-            <div class="cadre" style="width: 312px;height: 140px;color: #212529;border: 1px solid rgba(0,0,0,0.12) ;">
-                <div class="d-xl-flex justify-content-xl-end" style="margin-right: 10px;margin-top: 5px;">
-                    <p style="width: 300px;font-family: Roboto, sans-serif;margin: 0px;font-weight: bold;margin-left: 10px;">Menu Sushi 1</p>
-                </div>
-                <p style="width: 300px;font-family: Roboto, sans-serif;padding-top: 5px;padding-bottom: 5 px;margin-left: 10px;">12 pièces - 6 sushis saumon, 6 sushis avocat. Servis avec du riz.<br></p>
-                <p style="width: 300px;font-family: Roboto, sans-serif;margin: 0px;font-weight: bold;margin-left: 10px;">12.90€<br></p>
-            </div>
-            <div><img class="d-xl-flex" src="assets/img/sushi%203.jpeg" style="width: 200px;height: 140px;"></div>
-        </div>
-    </div>
- #}
-
-<footer>
-         {{ include ("layout/footer.html.twig") }}
-</footer>
 
 {% endblock %}

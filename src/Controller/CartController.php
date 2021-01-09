@@ -12,30 +12,32 @@ class CartController extends AbstractController
     /**
      * @Route("/cart", name="cart_index")
      */
-    public function index(): Response
-    {
+    public function index(CartService $cartService): Response
+    {   
+        
         return $this->render('cart/index.html.twig', [
-            'controller_name' => 'CartController',
+            'items' => $cartService->getFullCart(),
+            'total' => $cartService->getTotal()
         ]);
     }
 
     /**
-     * @Route("/cart/add/{id}", name="cart_index")
+     * @Route("/cart/add/{id}", name="cart_add")
      */
-    public function add(CartService $cartService): Response
+    public function add($id, CartService $cartService): Response
     {
-        return $this->render('cart/index.html.twig', [
-            'controller_name' => 'CartController',
-        ]);
+
+        $cartService->add($id);
+
+        return $this->redirectToRoute("cart_index");
     }
 
     /**
-     * @Route("/cart/remove/{id}", name="cart_index")
+     * @Route("/cart/remove/{id}", name="cart_remove")
      */
-    public function remove(CartService $cartService): Response
+    public function remove($id, CartService $cartService): Response
     {
-        return $this->render('cart/index.html.twig', [
-            'controller_name' => 'CartController',
-        ]);
+        $cartService->remove($id);
+        return $this->redirectToRoute("cart_index");
     }
 }

@@ -2,13 +2,13 @@
 
 namespace App\Entity;
 
-use App\Repository\PlatRepository;
+use App\Repository\DishRepository;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
  * @ORM\Entity(repositoryClass=PlatRepository::class)
  */
-class Plat
+class Dish
 {
     /**
      * @ORM\Id

@@ -2,9 +2,8 @@
 
 namespace App\Controller;
 
-use App\Repository\PlatRepository;
+use App\Repository\DishRepository;
 use App\Entity\Restorer;
-use App\Entity\Plat;
 use App\Entity\UserClient;
 use App\Form\RestorerType;
 use App\Form\UserClientType;
@@ -30,23 +29,23 @@ class IndexController extends AbstractController
     /**
      * @Route("/restaurant", name="restaurant")
      */
-    public function plat(PlatRepository $platRepository): Response
+    public function dish(DishRepository $dishRepository): Response
     {
-        $plats = $platRepository->findAll();
+        $dishs = $dishRepository->findAll();
         return $this->render('index/index.html.twig', [
-            'plats' => $plats,
+            'dishs' => $dishs,
         ]);
     }
      
     /**
-    * @Route("/restaurant/{id}", name="plat")
+    * @Route("/restaurant/{id}", name="dish")
     */
-   public function plat_id(Restorer $restorer): Response
+   public function dish_id(Restorer $restorer): Response
    {
-    $plats = $restorer->getPlats();
+    $dishs = $restorer->getDishs();
     return $this->render('index/index.html.twig', [
       'controller_name' => 'IndexController',
-      'plats' => $plats
+      'dishs' => $dishs,
     ]);
    }
 

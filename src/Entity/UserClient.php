@@ -21,6 +21,11 @@ class UserClient extends User
     private $lastname;
 
     /**
+     * @ORM\Column(type="float", nullable=true)
+     */
+    private $wallet;
+
+    /**
      * @return mixed
      */
     public function getLastname()
@@ -50,6 +55,18 @@ class UserClient extends User
     public function setFirstname($firstname): void
     {
         $this->firstname = $firstname;
+    }
+
+    public function getWallet(): ?float
+    {
+        return $this->wallet;
+    }
+
+    public function setWallet(?float $wallet): self
+    {
+        $this->wallet = $wallet;
+
+        return $this;
     }
 
 }

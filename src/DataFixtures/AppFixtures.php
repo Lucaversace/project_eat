@@ -2,7 +2,7 @@
 
 namespace App\DataFixtures;
 
-use App\Entity\Plat;
+use App\Entity\Dish;
 use App\Entity\Restorer;
 use App\Entity\Address;
 use Doctrine\Bundle\FixturesBundle\Fixture;
@@ -41,14 +41,14 @@ class AppFixtures extends Fixture
       $manager->persist($restorer);
 
       for ($j = 0; $j < 12; $j++) {
-        $plat = new Plat();
-        $plat
+        $dish = new Dish();
+        $dish
           ->setRestaurant($restorer)
           ->setNom($faker->state())
           ->setDescription($faker->text(50))
           ->setImage($faker->imageUrl(200,140))
           ->setPrice($faker->randomFloat(2,$min = 2.5, $max = 20));
-        $manager->persist($plat);
+        $manager->persist($dish);
       }
     }
     $manager->flush();

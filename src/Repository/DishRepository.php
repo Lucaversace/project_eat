@@ -2,25 +2,25 @@
 
 namespace App\Repository;
 
-use App\Entity\Plat;
+use App\Entity\Dish;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 
 /**
- * @method Plat|null find($id, $lockMode = null, $lockVersion = null)
- * @method Plat|null findOneBy(array $criteria, array $orderBy = null)
- * @method Plat[]    findAll()
- * @method Plat[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
+ * @method Dish|null find($id, $lockMode = null, $lockVersion = null)
+ * @method Dish|null findOneBy(array $criteria, array $orderBy = null)
+ * @method Dish[]    findAll()
+ * @method Dish[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
  */
-class PlatRepository extends ServiceEntityRepository
+class DishRepository extends ServiceEntityRepository
 {
     public function __construct(ManagerRegistry $registry)
     {
-        parent::__construct($registry, Plat::class);
+        parent::__construct($registry, Dish::class);
     }
 
     // /**
-    //  * @return Plat[] Returns an array of Plat objects
+    //  * @return Dish[] Returns an array of Dish objects
     //  */
     /*
     public function findByExampleField($value)
@@ -37,7 +37,7 @@ class PlatRepository extends ServiceEntityRepository
     */
 
     /*
-    public function findOneBySomeField($value): ?Plat
+    public function findOneBySomeField($value): ?Dish
     {
         return $this->createQueryBuilder('p')
             ->andWhere('p.exampleField = :val')
