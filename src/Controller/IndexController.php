@@ -7,6 +7,7 @@ use App\Entity\Restorer;
 use App\Entity\UserClient;
 use App\Form\RestorerType;
 use App\Form\UserClientType;
+use App\Repository\RestorerRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -16,40 +17,28 @@ use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 class IndexController extends AbstractController
 {
     /**
-     * @Route("/index", name="index")
+     * @Route("/Accueil", name="accueil")
      */
-    public function index(): Response
+    public function index(RestorerRepository $restorerRepository): Response
     {
+        $restorers = $restorerRepository->findAll();
         return $this->render('index/index.html.twig', [
-            'controller_name' => 'IndexController',
-        ]);
-    }
-    
-
-    /**
-     * @Route("/restaurant", name="restaurant")
-     */
-    public function dish(DishRepository $dishRepository): Response
-    {
-        $dishs = $dishRepository->findAll();
-        return $this->render('index/index.html.twig', [
-            'dishs' => $dishs,
+            'restorers' => $restorers,
         ]);
     }
      
     /**
     * @Route("/restaurant/{id}", name="dish")
     */
-   public function dish_id(Restorer $restorer): Response
+   public function dish_id($id, RestorerRepository $restorerRepository): Response
    {
-    $dishs = $restorer->getDishs();
-    return $this->render('index/index.html.twig', [
-      'controller_name' => 'IndexController',
-      'dishs' => $dishs,
-    ]);
+       $restorer = $restorerRepository->find($id);
+        $dishs = $restorerRepository->find($id)->getDishs();
+        return $this->render('index/restorer.html.twig', [
+        'restorer' => $restorer,
+        'dishs' => $dishs,
+        ]);
    }
-
-
 
 
     /**
@@ -95,7 +84,7 @@ class IndexController extends AbstractController
             $userClient->setPassword($hash);
             $entityManager->flush();
 
-            return $this->redirectToRoute('user_client_index');
+            return $this->redirectToRoute('restaurant');
         }
 
         return $this->render('user_client/new.html.twig', [
