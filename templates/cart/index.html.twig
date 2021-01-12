@@ -3,7 +3,7 @@
 {% block title %}Panier{% endblock %}
 
 {% block body %}
-
+    {{dump(app.user)}}
     <h1>Votre panier</h1>
 
     {% if items | length > 0 %}

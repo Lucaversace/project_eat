@@ -2,7 +2,6 @@
 
 namespace App\Controller;
 
-use App\Repository\DishRepository;
 use App\Entity\Restorer;
 use App\Entity\UserClient;
 use App\Form\RestorerType;
@@ -14,6 +13,9 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 
+/**
+ * @Route("/")
+ */
 class IndexController extends AbstractController
 {
     /**
@@ -58,7 +60,7 @@ class IndexController extends AbstractController
             $entityManager->persist($restorer);
             $entityManager->flush();
 
-            return $this->redirectToRoute('restorer_index');
+            return $this->redirectToRoute('accueil');
         }
 
         return $this->render('restorer/new.html.twig', [
@@ -84,7 +86,7 @@ class IndexController extends AbstractController
             $userClient->setPassword($hash);
             $entityManager->flush();
 
-            return $this->redirectToRoute('restaurant');
+            return $this->redirectToRoute('accueil');
         }
 
         return $this->render('user_client/new.html.twig', [

@@ -14,10 +14,10 @@ class OrderController extends AbstractController
      */
     public function index(OrderService $orderService): Response
     {
-        $newOrder = $orderService->createOrder();
+        $order = $orderService->createOrder();
         
         return $this->render('order/index.html.twig', [
-            'controller_name' => 'OrderController',
+            'order' => $order,
         ]);
     }
 }
