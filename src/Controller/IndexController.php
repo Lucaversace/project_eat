@@ -30,7 +30,7 @@ class IndexController extends AbstractController
     }
      
     /**
-    * @Route("/Restaurant/{id}", name="dish")
+    * @Route("/Restaurant/{id}", name="restaurant")
     */
    public function dish_id($id, RestorerRepository $restorerRepository): Response
    {
