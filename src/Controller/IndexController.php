@@ -2,8 +2,10 @@
 
 namespace App\Controller;
 
+use App\Entity\Address;
 use App\Entity\Restorer;
 use App\Entity\UserClient;
+use App\Form\AddressType;
 use App\Form\RestorerType;
 use App\Form\UserClientType;
 use App\Repository\RestorerRepository;
@@ -51,6 +53,7 @@ class IndexController extends AbstractController
         $restorer = new Restorer();
         $form = $this->createForm(RestorerType::class, $restorer);
         $form->handleRequest($request);
+        
 
         if ($form->isSubmitted() && $form->isValid()) {
             $entityManager = $this->getDoctrine()->getManager();
@@ -77,7 +80,7 @@ class IndexController extends AbstractController
         $userClient = new UserClient();
         $form = $this->createForm(UserClientType::class, $userClient);
         $form->handleRequest($request);
-
+        /*   dd($form); */ 
         if ($form->isSubmitted() && $form->isValid()) {
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($userClient);
