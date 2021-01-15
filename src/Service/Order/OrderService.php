@@ -4,19 +4,22 @@ namespace App\Service\Order;
 
 use App\Entity\LineArticle;
 use App\Entity\Order;
+use App\Entity\StateOrder;
 use App\Service\Cart\CartService;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
-use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
+use Symfony\Component\Security\Core\Security;
 
 class OrderService{
 
     protected $cartService;
     protected $session;
+    protected $security;
 
-    public function __construct( CartService $cartService, SessionInterface $session)
+    public function __construct( CartService $cartService, SessionInterface $session, Security $security)
     {
         $this->cartService = $cartService;   
         $this->session = $session;
+        $this->security = $security;
     }
 
     public function createOrder(): Order{
@@ -40,13 +43,13 @@ class OrderService{
             $lineArticle->setQuantity($quantity);
 
             $priceLine = $price * $quantity;
-
             $lineArticle->setPrice($priceLine);
-
             $totalOrder += $priceLine;
+
             $order->setPrice($totalOrder);
             $order->setRestaurant($product['product']->getRestaurant());
             $order->addLineArticle($lineArticle);
+            $order->setStatus(StateOrder::IN_PROGRESS);
 
         }
         return $order;

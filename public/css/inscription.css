@@ -3,7 +3,7 @@
   font-size: 16px;
   width: 200px;
   height: 50px;
-  background-color: #e74c3c;
+  background-color: #6c757d;
   border-color: transparent;
 }
 
@@ -22,14 +22,14 @@ input[type="text"], input[type="email"], input[type="tel"], textarea {
   border-radius: 8px !important;
 }
 
-.btn-primary:hover {
+.btn-secondary:hover {
   color: #fff;
   background-color: #4daade;
   border-color: #4daade;
   box-shadow: 0px 10px 15px rgba(157,157,157,0.4);
 }
 
-.btn-primary:not(:disabled):not(.disabled).active, .btn-primary:not(:disabled):not(.disabled):active, .show > .btn-primary.dropdown-toggle {
+.btn-secondary:not(:disabled):not(.disabled).active, .btn-secondary:not(:disabled):not(.disabled):active, .show > .btn-secondary.dropdown-toggle {
   color: #fff;
   background-color: #4daade;
   border-color: #4daade;
@@ -41,9 +41,12 @@ input[type="text"], input[type="email"], input[type="tel"], textarea {
 }
 
 .modern-form__hr {
-  border-color: #4daade;
+  border-color: #6c757d;;
   border-width: 2px;
   width: 121px;
+  text-align: center;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .modern-form__form-container {

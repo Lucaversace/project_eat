@@ -97,8 +97,6 @@ class AppCustomAuthenticator extends AbstractFormLoginAuthenticator implements P
         }
 
         $user = $token->getUser();
-        $session = $request->getSession();
-        $session->set('user', $user);
         $role = $user->getRoles();
 
         switch ($role[0]) {

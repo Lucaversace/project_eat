@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Log in!{% endblock %}
+{% block title %}Connexion{% endblock %}
 
 {% block body %}
 <form method="post">
@@ -14,16 +14,27 @@
         </div>
     {% endif %}
 
-    <h1 class="h3 mb-3 font-weight-normal">Please sign in</h1>
-    <label for="inputEmail">Email</label>
-    <input type="email" value="{{ last_username }}" name="email" id="inputEmail" class="form-control" required autofocus>
-    <label for="inputPassword">Password</label>
-    <input type="password" name="password" id="inputPassword" class="form-control" required>
 
-    <input type="hidden" name="_csrf_token"
-           value="{{ csrf_token('authenticate') }}"
-    >
+ <div class="container modern-form">
+        <div class="text-center">
+            <h4 style="color: #212529;font-size: 45px;">Connexion</h4>
+        </div>
+        <hr class="modern-form__hr">
+        <div style="padding-top: 30px;">
+            <form>
+                <div class="form-row" style="margin-top: 5px; ">
+                    <div class="col">
+                            <label for="inputEmail"></label>
+                            <input type="email"  placeholder="Email" style="height: 50px;" value="{{ last_username }}" name="email" id="inputEmail" class="form-control" required autofocus>
+                            <label for="inputPassword" ></label>
+                            <input type="password" placeholder="Mot de passe" style="height: 50px;" name="password" id="inputPassword" class="form-control" required>
 
+                            <input type="hidden" name="_csrf_token"
+                                value="{{ csrf_token('authenticate') }}"
+                            >
+                        </div>
+                    </div>
+                </div>
     {#
         Uncomment this section and add a remember_me option below your firewall to activate remember me functionality.
         See https://symfony.com/doc/current/security/remember_me.html
@@ -34,9 +45,15 @@
             </label>
         </div>
     #}
+         <div class="form-row" style="margin-top:50px">
+                    <div class="col text-center">   
+                      <button class="btn btn-secondary" type="submit">
+                       Se connecter
+                      </button>
+                    </div>
+        </div>
 
-    <button class="btn btn-lg btn-primary" type="submit">
-        Sign in
-    </button>
-</form>
+        </form>
+        </div>
+    </div>
 {% endblock %}

@@ -21,12 +21,6 @@ class Order
     private $id;
 
     /**
-     * @ORM\OneToOne(targetEntity=StateOrder::class, cascade={"persist", "remove"})
-     * @ORM\JoinColumn(nullable=false)
-     */
-    private $state;
-
-    /**
      * @ORM\ManyToOne(targetEntity=User::class, inversedBy="orders")
      * @ORM\JoinColumn(nullable=false)
      */
@@ -48,6 +42,16 @@ class Order
      */
     private $price;
 
+    /**
+     * @ORM\Column(type="datetime")
+     */
+    private $date;
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $status;
+
     public function __construct()
     {
         $this->lineArticle = new ArrayCollection();
@@ -56,18 +60,6 @@ class Order
     public function getId(): ?int
     {
         return $this->id;
-    }
-
-    public function getState(): ?StateOrder
-    {
-        return $this->state;
-    }
-
-    public function setState(StateOrder $state): self
-    {
-        $this->state = $state;
-
-        return $this;
     }
 
     public function getUser(): ?User
@@ -135,4 +127,29 @@ class Order
 
         return $this;
     }
+
+    public function getDate(): ?\DateTimeInterface
+    {
+        return $this->date;
+    }
+
+    public function setDate(\DateTimeInterface $date): self
+    {
+        $this->date = $date;
+
+        return $this;
+    }
+
+    public function getStatus(): ?string
+    {
+        return $this->status;
+    }
+
+    public function setStatus(string $status): self
+    {
+        $this->status = $status;
+
+        return $this;
+    }
+
 }

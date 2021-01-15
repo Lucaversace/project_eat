@@ -38,7 +38,7 @@ class UserClientController extends AbstractController
     }
 
     /**
-     * @Route("/{id}/edit", name="user_client_edit", methods={"GET","POST"})
+     * @Route("/Informations/{id}", name="user_client_edit", methods={"GET","POST"})
      */
     public function edit(Request $request, UserClient $userClient): Response
     {
@@ -48,7 +48,7 @@ class UserClientController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $this->getDoctrine()->getManager()->flush();
 
-            return $this->redirectToRoute('user_client_index');
+            return $this->redirectToRoute('accueil');
         }
 
         return $this->render('user_client/edit.html.twig', [

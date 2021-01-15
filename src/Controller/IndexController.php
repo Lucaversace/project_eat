@@ -21,7 +21,7 @@ use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 class IndexController extends AbstractController
 {
     /**
-     * @Route("/Accueil", name="accueil")
+     * @Route("/", name="accueil")
      */
     public function index(RestorerRepository $restorerRepository): Response
     {
@@ -31,20 +31,6 @@ class IndexController extends AbstractController
         ]);
     }
      
-    /**
-    * @Route("/Restaurant/{id}", name="restaurant")
-    */
-   public function dish_id($id, RestorerRepository $restorerRepository): Response
-   {
-       $restorer = $restorerRepository->find($id);
-        $dishs = $restorerRepository->find($id)->getDishs();
-        return $this->render('index/restorer.html.twig', [
-        'restorer' => $restorer,
-        'dishs' => $dishs,
-        ]);
-   }
-
-
     /**
      * @Route("/Restaurant/Inscription", name="restorer_new", methods={"GET","POST"})
      */
@@ -80,7 +66,7 @@ class IndexController extends AbstractController
         $userClient = new UserClient();
         $form = $this->createForm(UserClientType::class, $userClient);
         $form->handleRequest($request);
-        /*   dd($form); */ 
+        
         if ($form->isSubmitted() && $form->isValid()) {
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($userClient);
@@ -97,4 +83,20 @@ class IndexController extends AbstractController
             'form' => $form->createView(),
         ]);
     }
+
+    /**
+    * @Route("/Restaurant/{id}", name="restaurant")
+    */
+   public function dish_id($id, RestorerRepository $restorerRepository): Response
+   {
+       $restorer = $restorerRepository->find($id);
+        $dishs = $restorerRepository->find($id)->getDishs();
+        return $this->render('index/restorer.html.twig', [
+        'restorer' => $restorer,
+        'dishs' => $dishs,
+        ]);
+   }
+
+
+
 }
