@@ -25,7 +25,7 @@
               {% endif %}
               {% if app.user.roles[0] == "ROLE_USER" %}
                 <li><a class="dropdown-item" href="#">Historique de commandes</a></li>
-                <li><a class="dropdown-item" href="#">Informations Personnelles</a></li>
+                <li><a class="dropdown-item" href="{{ path('user_client_edit', {'id': app.user.id }) }}">Informations Personnelles</a></li>
                 <li class="divider" role="separator"></li>
                 <li><a class="dropdown-item" href="{{ path('cart_index') }}">Panier</a></li>
                 <li class="divider" role="separator"></li>
@@ -77,7 +77,5 @@
     <!-- End Header 1 code -->
   </div>
 </div>
-    <script src="assets/js/jquery.min.js"></script>
-    <script src="assets/bootstrap/js/bootstrap.min.js"></script>
-    <script src="assets/js/Menu.js"></script>
+
 {% endblock %}
