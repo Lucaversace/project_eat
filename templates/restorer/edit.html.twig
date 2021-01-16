@@ -3,11 +3,12 @@
 {% block title %}Edit Restorer{% endblock %}
 
 {% block body %}
-    <h1>Edit Restorer</h1>
+    <div class="text-center">
+        <h4 style="color: #212529;font-size: 45px; margin-top:60px">Modifier mon restaurant</h4>
+    </div>
+    <hr class="modern-form__hr">
 
     {{ include('restorer/_form.html.twig', {'button_label': 'Update'}) }}
 
-    <a href="{{ path('restorer_index') }}">back to list</a>
-
-    {{ include('restorer/_delete_form.html.twig') }}
+{#     {{ include('restorer/_delete_form.html.twig') }} #}
 {% endblock %}

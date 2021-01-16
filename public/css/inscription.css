@@ -49,10 +49,10 @@ input[type="text"], input[type="email"], input[type="tel"], textarea {
   margin-right: auto;
 }
 
-.modern-form__form-container {
-  padding-top: 100px;
-}
-
+/*  .modern-form__form-container {
+  margin-top: 100px;
+} */
+ 
 .modern-form__form-group--padding-r {
   padding-right: 20px;
 }
