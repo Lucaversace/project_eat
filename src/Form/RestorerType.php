@@ -17,10 +17,14 @@ class RestorerType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
+            ->add('restaurantName',TextType::class)
             ->add('email',EmailType::class)
             ->add('password', PasswordType::class)
-            ->add('restaurantName',TextType::class)
-            ->add('image',FileType::class)
+ /*            ->add('image') */
+            ->add('coverFile',FileType::class,[
+                'label'=>"Choisissez une image pour votre restaurant",
+                'mapped'=>false
+            ])
             ->add('address', AddressType::class)
             ->add('submit',SubmitType::class)
         ;

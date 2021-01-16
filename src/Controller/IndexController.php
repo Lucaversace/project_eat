@@ -2,6 +2,8 @@
 
 namespace App\Controller;
 
+use Symfony\Component\HttpFoundation\File\UploadedFile;
+
 use App\Entity\Address;
 use App\Entity\Restorer;
 use App\Entity\UserClient;
@@ -9,6 +11,7 @@ use App\Form\AddressType;
 use App\Form\RestorerType;
 use App\Form\UserClientType;
 use App\Repository\RestorerRepository;
+use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -26,6 +29,11 @@ class IndexController extends AbstractController
     public function index(RestorerRepository $restorerRepository): Response
     {
         $restorers = $restorerRepository->findAll();
+/*         foreach($restorers as $restorer){
+            dump(file_exists('uploads/'.$restorer->getImage()));
+        }
+        dd($restorers); */
+
         return $this->render('index/index.html.twig', [
             'restorers' => $restorers,
         ]);
@@ -34,7 +42,7 @@ class IndexController extends AbstractController
     /**
      * @Route("/Restaurant/Inscription", name="restorer_new", methods={"GET","POST"})
      */
-    public function newRestorer(Request $request, UserPasswordEncoderInterface $encoder): Response
+    public function newRestorer(Request $request, UserPasswordEncoderInterface $encoder,EntityManagerInterface $em): Response
     {
         $restorer = new Restorer();
         $form = $this->createForm(RestorerType::class, $restorer);
@@ -42,12 +50,20 @@ class IndexController extends AbstractController
         
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $entityManager = $this->getDoctrine()->getManager();
+            /** @var UploadedFile */;
+            $file = $form->get('coverFile')->getData();
+            $filename = md5(uniqid()) . '.' . $file->guessExtension();
+            $file->move(
+                $this->getParameter('upload_dir'),
+                $filename
+            );
+            $restorer->setImage($filename);
+
             $restorer->setRoles(["ROLE_RESTORER"]);
             $hash = $encoder->encodePassword($restorer, $restorer->getPassword());
             $restorer->setPassword($hash);
-            $entityManager->persist($restorer);
-            $entityManager->flush();
+            $em->persist($restorer);
+            $em->flush();
 
             return $this->redirectToRoute('accueil');
         }

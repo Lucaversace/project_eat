@@ -30,18 +30,24 @@
     </div>
 
 
-
     <h1 style="font-family: Roboto, sans-serif;font-size: 50px;margin-left: 25px;margin-top: 25px;margin-bottom: 50px;line-height: 47px;font-weight: bold;">Les meilleurs restaurants</h1>
     <div class="row text-left" style="width: 100%;margin-bottom: 50px;">
        
        {% for restorer in restorers %}
-        <div class="col text-left" style="width: 100%;margin-left: 50px;"><img src="assets/img/sushi%202.jpg" style="height: 237px;width: 429px;">
-            <a href="{{ path('restaurant',{'id':restorer.id}) }}">
+       {% if 'https' not in restorer.image  %}
+        <div class="col text-left" style="width: 100%;margin-left: 50px;">
+                            {# NO TRESPASSING #}
+
+                            {# CHAMP LIBRE #}
+            <img src="{{ asset('uploads/' ~ restorer.image) }}" style="height: 237px;width: 429px;" alt=" {{restorer.restaurantName}}">
+            <a href="{{ path('restaurant',{id:restorer.id}) }}">
                 <p style="height: 47px;font-family: Roboto, sans-serif;font-size: 18px;margin-top: 10px;font-weight:bold;">{{restorer.restaurantName}} • {{restorer.address.street}}, {{restorer.address.city}}.</p>
                 <p>Frais : 2.50€ • Attente : 1 Heure</p>
             </a>
          </div>
+        {% endif %}
         {% endfor %}
+
         
     </div>
 
