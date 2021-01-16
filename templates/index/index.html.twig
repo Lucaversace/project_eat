@@ -40,8 +40,8 @@
 
                             {# CHAMP LIBRE #}
             <img src="{{ asset('uploads/' ~ restorer.image) }}" style="height: 237px;width: 429px;" alt=" {{restorer.restaurantName}}">
-            <a href="{{ path('restaurant',{id:restorer.id}) }}">
-                <p style="height: 47px;font-family: Roboto, sans-serif;font-size: 18px;margin-top: 10px;font-weight:bold;">{{restorer.restaurantName}} • {{restorer.address.street}}, {{restorer.address.city}}.</p>
+            <a href="{{ path('restaurant',{id:restorer.id}) }}"  style="color: black;" >
+                <p style="margin-bottom:0px;font-family: Roboto, sans-serif;font-size: 18px;margin-top: 10px;font-weight:bold;">{{restorer.restaurantName}} • {{restorer.address.street}}, {{restorer.address.city}}.</p>
                 <p>Frais : 2.50€ • Attente : 1 Heure</p>
             </a>
          </div>
