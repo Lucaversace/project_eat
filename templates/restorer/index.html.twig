@@ -1,20 +1,18 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Restorer index{% endblock %}
+{% block title %}Liste des Restaurants{% endblock %}
 
 {% block body %}
-    <h1>Restorer index</h1>
-
     <table class="table">
         <thead>
             <tr>
                 <th>Id</th>
                 <th>Email</th>
-                <th>Roles</th>
-                <th>Password</th>
-                <th>RestaurantName</th>
-                <th>Image</th>
-                <th>actions</th>
+{#                 <th>Roles</th>
+                <th>Password</th> #}
+                <th>Nom du restautant</th>
+{#                 <th>Image</th> #}
+                <th></th>
             </tr>
         </thead>
         <tbody>
@@ -22,13 +20,13 @@
             <tr>
                 <td>{{ restorer.id }}</td>
                 <td>{{ restorer.email }}</td>
-                <td>{{ restorer.roles ? restorer.roles|json_encode : '' }}</td>
-                <td>{{ restorer.password }}</td>
+{#                 <td>{{ restorer.roles ? restorer.roles|json_encode : '' }}</td>
+                <td>{{ restorer.password }}</td> #}
                 <td>{{ restorer.restaurantName }}</td>
-                <td>{{ restorer.image }}</td>
+{#                 <td>{{ restorer.image }}</td> #}
                 <td>
-                    <a href="{{ path('restorer_show', {'id': restorer.id}) }}">show</a>
-                    <a href="{{ path('restorer_edit', {'id': restorer.id}) }}">edit</a>
+{#                     <a href="{{ path('restorer_show', {'id': restorer.id}) }}">show</a> #}
+                    <a href="{{ path('restorer_edit', {'id': restorer.id}) }}" style="color:#009879">Modifier</a>
                 </td>
             </tr>
         {% else %}
@@ -38,6 +36,6 @@
         {% endfor %}
         </tbody>
     </table>
-
-    <a href="{{ path('restorer_new') }}">Create new</a>
+{# 
+    <a href="{{ path('restorer_new') }}">Create new</a> #}
 {% endblock %}

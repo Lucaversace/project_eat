@@ -1,20 +1,18 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}UserClient index{% endblock %}
+{% block title %}Liste Clients{% endblock %}
 
 {% block body %}
-    <h1>UserClient index</h1>
-
     <table class="table">
         <thead>
             <tr>
                 <th>Id</th>
                 <th>Email</th>
-                <th>Roles</th>
-                <th>Password</th>
-                <th>Firstname</th>
-                <th>Lastname</th>
-                <th>actions</th>
+                {# <th>Roles</th> #}
+                {# <th>Password</th> #}
+                <th>Prénom</th>
+                <th>Nom</th>
+                <th></th>
             </tr>
         </thead>
         <tbody>
@@ -22,12 +20,12 @@
             <tr>
                 <td>{{ user_client.id }}</td>
                 <td>{{ user_client.email }}</td>
-                <td>{{ user_client.roles ? user_client.roles|json_encode : '' }}</td>
-                <td>{{ user_client.password }}</td>
+                {# <td>{{ user_client.roles ? user_client.roles|json_encode : '' }}</td> #}
+                {# <td>{{ user_client.password }}</td> #}
                 <td>{{ user_client.firstname }}</td>
                 <td>{{ user_client.lastname }}</td>
                 <td>
-                    <a href="{{ path('user_client_show', {'id': user_client.id}) }}">show</a>
+                    {# <a href="{{ path('user_client_show', {'id': user_client.id}) }}">show</a> #}
                     <a href="{{ path('user_client_edit', {'id': user_client.id}) }}">edit</a>
                 </td>
             </tr>
@@ -39,5 +37,5 @@
         </tbody>
     </table>
 
-    <a href="{{ path('user_client_new') }}">Create new</a>
+{#     <a href="{{ path('user_client_new') }}">Create new</a> #}
 {% endblock %}

@@ -2,3 +2,31 @@
 #logo {
     list-style: none;
 }
+
+tbody tr:nth-of-type(even) {
+    background-color: #f3f3f3;
+}
+
+tbody tr:last-of-type {
+    border-bottom: 2px solid #009879;
+}
+
+tbody tr.active-row {
+    font-weight: bold;
+    color: #009879;
+}
+
+table{
+ margin-top: 10px;
+ border-style: solid;
+ border-color: #009879;
+}
+thead tr{
+    background: #009879;
+    color: rgb(255,255,255);
+    border-radius: 50px;
+}
+
+tbody{
+    border-bottom: 1px solid #dddddd;
+}
