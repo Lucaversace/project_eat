@@ -3,7 +3,7 @@
 {% block title %}Dish index{% endblock %}
 
 {% block body %}
-    <h1>Dish index</h1>
+    <h1>Mes plats</h1>
 
     <table class="table">
         <thead>
@@ -11,9 +11,9 @@
                 <th>Id</th>
                 <th>Nom</th>
                 <th>Description</th>
-                <th>Price</th>
+                <th>Prix</th>
                 <th>Image</th>
-                <th>actions</th>
+                <th></th>
             </tr>
         </thead>
         <tbody>
@@ -23,10 +23,11 @@
                 <td>{{ dish.nom }}</td>
                 <td>{{ dish.description }}</td>
                 <td>{{ dish.price }}</td>
-                <td>{{ dish.image }}</td>
+                <td> <img src="{{ asset('uploads/' ~ dish.image) }}" style="height: 237px;width: 429px;" alt=" {{dish.nom}}"></td>
                 <td>
-                    <a href="{{ path('dish_show', {'id': dish.id}) }}">show</a>
-                    <a href="{{ path('dish_edit', {'id': dish.id}) }}">edit</a>
+{#                     <a href="{{ path('dish_show', {'id': dish.id}) }}">show</a> #}
+                    <a href="{{ path('dish_edit', {'id': dish.id}) }}" style="color:#009879">Modifier</a>
+                    <a href="{{ path('dish_delete', {'id': dish.id}) }}" style="color:#009879; margin-left:30px;">Supprimer</a>
                 </td>
             </tr>
         {% else %}
@@ -37,5 +38,5 @@
         </tbody>
     </table>
 
-    <a href="{{ path('dish_new') }}">Create new</a>
+{#     <a href="{{ path('dish_new') }}">Create new</a> #}
 {% endblock %}

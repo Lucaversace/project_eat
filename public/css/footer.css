@@ -12,9 +12,9 @@
   text-align: center;
 }
 
-#myFooter .row {
-  margin-bottom: 60px;
-}
+/* #myFooter .row {
+  margin-bottom: 20px;
+} */
 
 #myFooter .footer-copyright p {
   margin: 10px;
@@ -87,6 +87,16 @@
   margin: 0 auto;
   margin-top: 10px;
   line-height: 25px;
+}
+
+#logo_footer{
+  height: 50%;
+
+}
+
+.container_footer{
+  display: table;
+  align-items: center;
 }
 
 @media screen and (max-width: 767px) {

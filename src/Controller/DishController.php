@@ -16,15 +16,6 @@ use Symfony\Component\Routing\Annotation\Route;
  */
 class DishController extends AbstractController
 {
-    /**
-     * @Route("/index", name="dish_index", methods={"GET"})
-     */
-    public function index(DishRepository $dishRepository): Response
-    {
-        return $this->render('dish/index.html.twig', [
-            'dishes' => $dishRepository->findAll(),
-        ]);
-    }
 
     /**
      * @Route("/new", name="dish_new", methods={"GET","POST"})
@@ -62,6 +53,8 @@ class DishController extends AbstractController
      */
     public function show(Dish $dish): Response
     {
+        
+
         return $this->render('dish/show.html.twig', [
             'dish' => $dish,
         ]);
@@ -98,6 +91,9 @@ class DishController extends AbstractController
             $entityManager->flush();
         }
 
-        return $this->redirectToRoute('dish_index');
+        $this->get('security.context')->setToken(null);
+        $this->get('request')->getSession()->invalidate();
+
+        return $this->redirectToRoute('dishs_restorer');
     }
 }

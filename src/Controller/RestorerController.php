@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\Restorer;
 use App\Form\RestorerType;
+use App\Repository\DishRepository;
 use App\Repository\RestorerRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -25,6 +26,18 @@ class RestorerController extends AbstractController
         ]);
     }
 
+    /**
+     * @Route("/Plats/{id}", name="dishs_restorer", methods={"GET"})
+     */
+    public function plat(RestorerRepository $restorerRepository,$id): Response
+    {
+        $restorer = $restorerRepository->find($id);
+        $dishes = $restorer->getDishs();
+        return $this->render('dish/index.html.twig', [
+            'dishes' => $dishes,
+        
+        ]);
+    }
 
 
     /**
