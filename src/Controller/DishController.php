@@ -48,7 +48,7 @@ class DishController extends AbstractController
             $entityManager->persist($dish);
             $entityManager->flush();
 
-            return $this->redirectToRoute('dish_index');
+            return $this->redirectToRoute('accueil');
         }
 
         return $this->render('dish/new.html.twig', [
