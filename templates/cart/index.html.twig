@@ -37,8 +37,16 @@
             </tr>
         </tfoot>
     </table>
-    <a href="{{ path('order') }}" class="btn btn-success">Passer la commande</a>
-    {% else %}
+    <div>
+    <h3>Récapitulatif de votre commande</h3>
+        <ul>
+            <li>Sous Total des achats : {{order.price - 2.5}} €</li>
+            <li>Frais de livraison : 2.50 €</li>
+            <li>Montant Total : {{order.price}} €</li>
+        </ul>
+    </div>
+    <a href="{{ path('payment') }}" class="btn btn-success">Passer la commande</a>
+   {% else %}
         <p>C'est  vide !</p>
     {% endif %}
     

@@ -38,10 +38,9 @@ class Dish
     private $image;
 
     /**
-     * @ORM\ManyToOne(targetEntity=Restorer::class, inversedBy="plats" )
+     * @ORM\ManyToOne(targetEntity=Restorer::class, inversedBy="dishs")
      */
     private $restaurant;
-
 
 
     public function getId(): ?int

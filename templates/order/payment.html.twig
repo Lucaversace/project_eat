@@ -1,0 +1,13 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{% endblock %}
+
+{% block body %}
+{% for label, messages in app.flashes(['success', 'danger']) %}
+                {% for message in messages %}
+                    <div class="alert alert-{{ label }} bubble position-absolute">
+                        {{ message }}
+                    </div>
+                {% endfor %}
+            {% endfor %}
+{% endblock %}
