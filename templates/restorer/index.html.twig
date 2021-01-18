@@ -10,7 +10,7 @@
                 <th>Email</th>
 {#                 <th>Roles</th>
                 <th>Password</th> #}
-                <th>Nom du restautant</th>
+                <th>Nom du restaurant</th>
 {#                 <th>Image</th> #}
                 <th></th>
             </tr>
@@ -27,6 +27,7 @@
                 <td>
 {#                     <a href="{{ path('restorer_show', {'id': restorer.id}) }}">show</a> #}
                     <a href="{{ path('restorer_edit', {'id': restorer.id}) }}" style="color:#009879">Modifier</a>
+                    <a href="{{ path('restorer_delete', {'id': restorer.id}) }}" style="color:#009879; margin-left:30px;">Supprimer</a>
                 </td>
             </tr>
         {% else %}

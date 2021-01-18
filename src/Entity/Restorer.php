@@ -23,7 +23,7 @@ class Restorer extends User
     private $image;
 
     /**
-     * @ORM\OneToMany(targetEntity=Dish::class, mappedBy="restaurant")
+     * @ORM\OneToMany(targetEntity=Dish::class, mappedBy="restaurant", cascade={"persist", "remove"})
      */
     private $dishs;
 

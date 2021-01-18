@@ -30,3 +30,17 @@ thead tr{
 tbody{
     border-bottom: 1px solid #dddddd;
 }
+
+.form_delete{
+    display: flex;
+    justify-content: center
+}
+
+.button_delete{
+    background-color: #009879; 
+    border: none;color: white;
+    padding: 15px 32px; text-align:
+    center; text-decoration: none; 
+    display: inline-block; 
+    font-size: 16px;
+}
