@@ -31,7 +31,7 @@
                 <p style="width: 300px;font-family: Roboto, sans-serif;padding-top: 5px;padding-bottom: 5 px;margin-left: 10px;">{{dish.description}}<br></p>
                 <p style="width: 300px;font-family: Roboto, sans-serif;margin: 0px;font-weight: bold;margin-left: 10px;">{{dish.price}} € <br></p>
             </div>
-            <div><img class="d-xl-flex" src={{dish.image}} style="width: 200px;height: 140px;" alt={{dish.nom}}></div>
+            <div><img class="d-xl-flex" src={{ asset('uploads/' ~ dish.image) }} style="width: 200px;height: 140px;" alt={{dish.nom}}></div>
         </div>
     {% endfor %}  
 </div>
