@@ -71,7 +71,7 @@ class DishController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $this->getDoctrine()->getManager()->flush();
 
-            return $this->redirectToRoute('dish_index');
+            return $this->redirectToRoute('accueil');
         }
 
         return $this->render('dish/edit.html.twig', [
@@ -91,9 +91,6 @@ class DishController extends AbstractController
             $entityManager->flush();
         }
 
-        $this->get('security.context')->setToken(null);
-        $this->get('request')->getSession()->invalidate();
-
-        return $this->redirectToRoute('dishs_restorer');
+        return $this->redirectToRoute('accueil');
     }
 }

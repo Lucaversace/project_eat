@@ -1,9 +1,12 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Edit Dish{% endblock %}
+{% block title %}Modifier un plat{% endblock %}
 
 {% block body %}
-    <h1>Edit Dish</h1>
+    <div class="text-center">
+        <h4 style="color: #212529;font-size: 45px; margin-top:60px">Modifier mon plat</h4>
+    </div>
+    <hr class="modern-form__hr">
 
     {{ include('dish/_form.html.twig', {'button_label': 'Update'}) }}
 

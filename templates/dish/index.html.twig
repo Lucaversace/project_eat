@@ -1,14 +1,15 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Dish index{% endblock %}
+{% block title %}Liste des plats{% endblock %}
 
 {% block body %}
-    <h1>Mes plats</h1>
-
+    <div class="text-center">
+        <h4 style="color: #212529;font-size: 45px; margin-top:60px">Liste de mes plats</h4>
+    </div>
+    <hr class="modern-form__hr">
     <table class="table">
         <thead>
             <tr>
-                <th>Id</th>
                 <th>Nom</th>
                 <th>Description</th>
                 <th>Prix</th>
@@ -19,7 +20,6 @@
         <tbody>
         {% for dish in dishes %}
             <tr>
-                <td>{{ dish.id }}</td>
                 <td>{{ dish.nom }}</td>
                 <td>{{ dish.description }}</td>
                 <td>{{ dish.price }}</td>
@@ -32,7 +32,7 @@
             </tr>
         {% else %}
             <tr>
-                <td colspan="6">no records found</td>
+                <td colspan="6">Il n'y a pas de plats</td>
             </tr>
         {% endfor %}
         </tbody>
