@@ -4,10 +4,8 @@ namespace App\Controller;
 
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 
-use App\Entity\Address;
 use App\Entity\Restorer;
 use App\Entity\UserClient;
-use App\Form\AddressType;
 use App\Form\RestorerType;
 use App\Form\UserClientType;
 use App\Repository\RestorerRepository;
@@ -24,7 +22,7 @@ use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 class IndexController extends AbstractController
 {
     /**
-     * @Route("/", name="accueil")
+     * @Route("/Accueil", name="accueil")
      */
     public function index(RestorerRepository $restorerRepository): Response
     {

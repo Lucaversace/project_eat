@@ -104,7 +104,7 @@ class AppCustomAuthenticator extends AbstractFormLoginAuthenticator implements P
                 return new RedirectResponse($this->urlGenerator->generate('admin'));
                 break;
             case "ROLE_RESTORER":
-                return new RedirectResponse($this->urlGenerator->generate('restorer_index'));
+                return new RedirectResponse($this->urlGenerator->generate('accueil'));
                 break;
             case "ROLE_USER":
                 return new RedirectResponse($this->urlGenerator->generate('accueil'));

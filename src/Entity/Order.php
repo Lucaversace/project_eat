@@ -151,5 +151,14 @@ class Order
 
         return $this;
     }
+    public function updateState(){
+        $status = $this->getStatus();
+        if($status == StateOrder::IN_PROGRESS){
+            $this->setStatus(StateOrder::FINISHED);
+        }else{
+            $this->setStatus(StateOrder::IN_PROGRESS);
+        }
+        
+    }
 
 }

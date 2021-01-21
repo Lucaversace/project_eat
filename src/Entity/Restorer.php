@@ -2,7 +2,6 @@
 
 namespace App\Entity;
 
-use App\Repository\RestorerRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
@@ -26,11 +25,6 @@ class Restorer extends User
      * @ORM\OneToMany(targetEntity=Dish::class, mappedBy="restaurant", cascade={"persist", "remove"})
      */
     private $dishs;
-
-    /**
-     * @ORM\OneToMany(targetEntity=Order::class, mappedBy="restaurant")
-     */
-    private $orders;
 
     public function __construct()
     {
@@ -86,36 +80,6 @@ class Restorer extends User
             // set the owning side to null (unless already changed)
             if ($dish->getRestaurant() === $this) {
                 $dish->setRestaurant(null);
-            }
-        }
-
-        return $this;
-    }
-
-    /**
-     * @return Collection|Order[]
-     */
-    public function getOrders(): Collection
-    {
-        return $this->orders;
-    }
-
-    public function addOrder(Order $order): self
-    {
-        if (!$this->orders->contains($order)) {
-            $this->orders[] = $order;
-            $order->setRestaurant($this);
-        }
-
-        return $this;
-    }
-
-    public function removeOrder(Order $order): self
-    {
-        if ($this->orders->removeElement($order)) {
-            // set the owning side to null (unless already changed)
-            if ($order->getRestaurant() === $this) {
-                $order->setRestaurant(null);
             }
         }
 

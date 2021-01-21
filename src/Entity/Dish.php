@@ -6,7 +6,7 @@ use App\Repository\DishRepository;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * @ORM\Entity(repositoryClass=PlatRepository::class)
+ * @ORM\Entity(repositoryClass=DishRepository::class)
  */
 class Dish
 {

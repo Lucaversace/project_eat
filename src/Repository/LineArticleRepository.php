@@ -36,15 +36,19 @@ class LineArticleRepository extends ServiceEntityRepository
     }
     */
 
-    /*
-    public function findOneBySomeField($value): ?LineArticle
+
+    public function findLineArticleByOrder($id)
     {
         return $this->createQueryBuilder('l')
-            ->andWhere('l.exampleField = :val')
-            ->setParameter('val', $value)
+
+            ->join('l.idOrder', 'o')
+            ->where('o.id = :val')
+            ->setParameter('val', $id)
             ->getQuery()
-            ->getOneOrNullResult()
+            ->getResult()
         ;
     }
-    */
+
 }
+/* "SELECT * FROM `order` as o INNER JOIN line_article as la ON o.id = la.id_order_id WHERE o.id = 1";
+ */

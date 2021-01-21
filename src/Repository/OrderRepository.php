@@ -36,15 +36,15 @@ class OrderRepository extends ServiceEntityRepository
     }
     */
 
-    /*
-    public function findOneBySomeField($value): ?Order
+
+    public function findOrderByRestaurant($restau)
     {
         return $this->createQueryBuilder('o')
-            ->andWhere('o.exampleField = :val')
-            ->setParameter('val', $value)
+            ->select('o')
+            ->where('o.restaurant = :id')
+            ->setParameter('id', $restau)
             ->getQuery()
-            ->getOneOrNullResult()
+            ->getResult()
         ;
     }
-    */
 }
