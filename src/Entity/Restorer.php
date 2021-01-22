@@ -2,7 +2,6 @@
 
 namespace App\Entity;
 
-use App\Repository\RestorerRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
@@ -26,7 +25,6 @@ class Restorer extends User
      * @ORM\OneToMany(targetEntity=Dish::class, mappedBy="restaurant", cascade={"persist", "remove"})
      */
     private $dishs;
-
 
     public function __construct()
     {
@@ -87,5 +85,4 @@ class Restorer extends User
 
         return $this;
     }
-
 }

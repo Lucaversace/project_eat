@@ -44,3 +44,15 @@ tbody{
     display: inline-block; 
     font-size: 16px;
 }
+
+li{
+    list-style: none;
+}
+
+/* .btn-command{
+    transition: 1s;
+} */
+.btn-command:hover{
+    
+    background-color: #037c64 !important;
+}

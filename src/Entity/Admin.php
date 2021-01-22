@@ -17,7 +17,7 @@ class Admin extends User
      * @ORM\Column(type="integer")
      */
     protected $id;
-
+ 
     public function getId(): ?int
     {
         return $this->id;

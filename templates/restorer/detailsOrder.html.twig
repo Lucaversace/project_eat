@@ -1,0 +1,34 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <div>
+        <table>
+            <tr>
+                <td>Client</td>
+                <td>{{order.user.firstname}} {{order.user.lastname}}</td>
+            </tr>
+            <tr>
+                <td>Date de la commande</td>
+                <td>{{order.date | date('d-m-Y à H:i')}}</td>
+            </tr>
+            {% for article in order.lineArticle %}
+             <tr>
+                <td>Produit {{loop.index}}</td>
+                <td>{{article.dish.nom}}</td>
+            </tr>
+            {% endfor %}
+              <tr>
+                <td>Restaurant</td>
+                <td>{{order.restaurant.restaurantName}}</td>
+            </tr>
+            <tr>
+                <td>Statut de la commande</td>
+                <td><a class="btn btn-primary" href="{{path('order_update', {'id': order.id})}}">{{order.status}}</a></td>
+            </tr>
+            <tr>
+                <td>Total</td>
+                <td>{{order.price}}</td>
+            </tr>
+        </table>
+    </div>
+{% endblock %}

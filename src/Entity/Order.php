@@ -33,9 +33,9 @@ class Order
     private $restaurant;
 
     /**
-     * @ORM\OneToMany(targetEntity=LineArticle::class, mappedBy="idOrder", orphanRemoval=true)
+     * @ORM\OneToMany(targetEntity=LineArticle::class, mappedBy="idOrder", orphanRemoval=true, cascade={"persist"})
      */
-    private $lineArticle;
+    private $lineArticle;   
 
     /**
      * @ORM\Column(type="float")
@@ -48,7 +48,7 @@ class Order
     private $date;
 
     /**
-     * @ORM\Column(type="string", length=255)
+         * @ORM\Column(type="string", length=255)
      */
     private $status;
 
@@ -150,6 +150,15 @@ class Order
         $this->status = $status;
 
         return $this;
+    }
+    public function updateState(){
+        $status = $this->getStatus();
+        if($status == StateOrder::IN_PROGRESS){
+            $this->setStatus(StateOrder::FINISHED);
+        }else{
+            $this->setStatus(StateOrder::IN_PROGRESS);
+        }
+        
     }
 
 }

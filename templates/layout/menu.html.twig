@@ -1,12 +1,10 @@
 {% block header %}
 
 <div class="header2 bg-success-gradiant">
-  <div class="">
+  <div>
     <!-- Header -->
     <nav class="navbar navbar-expand-lg h2-nav">
-
 				<span class="icon-menu"></span>
-			</button>
       {% if app.user %}
       <div class="collapse navbar-collapse hover-dropdown" id="header2">
         <ul class="navbar-nav">
@@ -18,13 +16,13 @@
 
             <ul class="dropdown-menu">
               {% if app.user.roles[0] == "ROLE_RESTORER" %}
-                <li><a class="dropdown-item" href="#">Historique de commandes</a></li>
+                <li><a class="dropdown-item" href="{{path('restorer_order_history')}}">Historique de commandes</a></li>
                 <li><a class="dropdown-item" href="{{ path('restorer_edit', {'id': app.user.id }) }}">Informations Personnelles</a></li>
                 <li><a class="dropdown-item" href="{{path('dishs_restorer',{'id':app.user.id}) }}">Mes plats</a></li>
 {#                 <li><a class="dropdown-item" href="#">Tableau de bord</a></li> #}
               {% endif %}
               {% if app.user.roles[0] == "ROLE_USER" %}
-                <li><a class="dropdown-item" href="#">Historique de commandes</a></li>
+                <li><a class="dropdown-item" href="{{ path('user_client_history') }}">Historique de commandes</a></li>
                 <li><a class="dropdown-item" href="{{ path('user_client_edit', {'id': app.user.id }) }}">Informations Personnelles</a></li>
                 <li class="divider" role="separator"></li>
                 <li><a class="dropdown-item" href="{{ path('cart_index') }}">Panier</a></li>

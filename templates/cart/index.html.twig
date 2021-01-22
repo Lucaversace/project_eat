@@ -3,7 +3,7 @@
 {% block title %}Panier{% endblock %}
 
 {% block body %}
-
+    
     <h1>Votre panier</h1>
 
     {% if items | length > 0 %}
@@ -22,23 +22,42 @@
 
             <tr>
                 <td>{{item.product.nom}}</td>
-                <td>{{item.product.price}}</td>
+                <td>{{item.product.price}} €</td>
                 <td>{{item.quantity}}</td>
-                <td>{{item.product.price * item.quantity}}</td>
-                <td><a href="{{ path('cart_remove', {'id': item.product.id }) }}" class"btn btn-danger btn-sm"> <i class="fas fa-trash"></i></a></td>
+                <td>{{item.product.price * item.quantity}} €</td>
+                <td><a href="{{ path('cart_remove', {'id': item.product.id }) }}" class"btn btn-danger btn-sm"> <i style="color:red" class="fas fa-trash"></i></a></td>
             </tr>
             {% endfor %}
         </tbody>
         <tfoot>
             <tr>
                 <td colspan="3">Total : </td>
-                <td>{{ total }}</td>
-                <td>€</td>
+                <td>{{ total }} €</td>
+                <td></td>
             </tr>
         </tfoot>
     </table>
-    <a href="{{ path('order') }}" class="btn btn-success">Passer la commande</a>
-    {% else %}
+    <div class="card text-center">
+        <div class="card-header">
+            Récapitulatif de votre commande
+        </div>
+        <div class="card-body">
+            <ul class="pl-0">
+                <li>Sous Total des achats : {{order.price - 2.5}} €</li>
+                <li>Frais de livraison : 2.50 €</li>
+                <li>Montant Total : {{order.price}} €</li>
+            </ul>
+            <a href="{{ path('payment') }}" style="background-color:#009879;color:white;" class="btn btn-command">Passer la commande</a>
+        </div>
+        <div class="card-footer text-muted">
+        </div>
+    </div>
+    <div>
+    <h3></h3>
+       
+    </div>
+    
+   {% else %}
         <p>C'est  vide !</p>
     {% endif %}
     

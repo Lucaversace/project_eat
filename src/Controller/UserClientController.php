@@ -2,8 +2,10 @@
 
 namespace App\Controller;
 
+use App\Entity\Order;
 use App\Entity\UserClient;
 use App\Form\UserClientType;
+use App\Repository\LineArticleRepository;
 use App\Repository\UserClientRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -15,33 +17,46 @@ use Symfony\Component\Routing\Annotation\Route;
  */
 class UserClientController extends AbstractController
 {
-    /**
-     * @Route("/users", name="user_client_index", methods={"GET"})
-     */
-    public function index(UserClientRepository $userClientRepository): Response
-    {
-        return $this->render('user_client/index.html.twig', [
-            'user_clients' => $userClientRepository->findAll(),
-        ]);
-    }
-
-
 
     /**
-     * @Route("/show/{id}", name="user_client_show", methods={"GET"})
+     * @Route("/Historique", name="user_client_history", methods={"GET"})
      */
-    public function show(UserClient $userClient): Response
+    public function history(): Response
     {
-        return $this->render('user_client/show.html.twig', [
-            'user_client' => $userClient,
+        $user = $this->getUser();
+        $orders = $user->getOrders();
+
+        return $this->render('user_client/historyOrder.html.twig', [
+            'orders' => $orders,
         ]);
     }
 
     /**
-     * @Route("/Informations/{id}", name="user_client_edit", methods={"GET","POST"})
+     * @Route("/DetailsCommande/{id}", name="order_details_client", methods={"GET"})
      */
-    public function edit(Request $request, UserClient $userClient): Response
+    public function orderDetails(Order $order): Response
     {
+        $user = $this->getUser();
+        $idUser = $user->getId();
+        if($order->getUser()->getId() !== $idUser){
+            $this->addFlash('danger', 'La commande que vous cherchez n\'existe pas');
+            return $this->redirectToRoute('user_client_history');
+        }
+        
+        return $this->render('user_client/detailsOrder.html.twig', [
+            'order' => $order,
+        ]);
+    }
+
+    /**
+     * @Route("/Informations", name="user_client_edit", methods={"GET","POST"})
+     */
+    public function edit(Request $request, UserClientRepository $userClientRepository): Response
+    {
+        $user = $this->getUser();
+        $id = $user->getId();
+        $userClient = $userClientRepository->find($id);
+
         $form = $this->createForm(UserClientType::class, $userClient);
         $form->handleRequest($request);
 

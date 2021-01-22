@@ -2,28 +2,83 @@
 
 namespace App\Controller;
 
+use App\Entity\Order;
 use App\Entity\Restorer;
 use App\Form\RestorerType;
 use App\Repository\DishRepository;
+use App\Repository\LineArticleRepository;
+use App\Repository\OrderRepository;
 use App\Repository\RestorerRepository;
+use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
 /**
- * @Route("/restorer")
+ * @Route("/MonRestaurant")
  */
 class RestorerController extends AbstractController
 {
     /**
-     * @Route("/", name="restorer_index", methods={"GET"})
+     * @Route("/Historique", name="restorer_history", methods={"GET"})
      */
-    public function index(RestorerRepository $restorerRepository): Response
-    {
+    public function history(RestorerRepository $restorerRepository): Response
+    {   
+        $user = $this->getUser();
+        $id = $user->getId();
+        $restorer = $restorerRepository->find($id);
+
+        $orders = $restorer->getOrders();
         return $this->render('restorer/index.html.twig', [
-            'restorers' => $restorerRepository->findAll(),
+            'orders' => $orders,
         ]);
+    }
+
+        /**
+     * @Route("/Historique/Commande", name="restorer_order_history", methods={"GET"})
+     */
+    public function historyOrder(OrderRepository $orderRepository): Response
+    {
+        $user = $this->getUser();
+        $orders = $orderRepository->findOrderByRestaurant($user);
+
+        return $this->render('restorer/historyOrder.html.twig', [
+            'orders' => $orders,
+        ]);
+    }
+
+    /**
+     * @Route("/DetailsCommande/{id}", name="order_details_restorer", methods={"GET"})
+     */
+    public function orderDetails(Order $order): Response
+    {
+        $user = $this->getUser();
+        $idUser = $user->getId();
+        if($order->getRestaurant()->getId() !== $idUser){
+            $this->addFlash('danger', 'La commande que vous cherchez n\'existe pas');
+            return $this->redirectToRoute('restorer_history');
+        }
+        
+        return $this->render('restorer/detailsOrder.html.twig', [
+            'order' => $order,
+        ]);
+    }
+
+    /**
+     * @Route("/UpdateCommande/{id}", name="order_update", methods={"GET"})
+     */
+    public function updateOrder(Order $order, EntityManagerInterface $em): Response
+    {
+        $user = $this->getUser();
+        $idUser = $user->getId();
+        if($order->getRestaurant()->getId() !== $idUser){
+            $this->addFlash('danger', 'La commande que vous cherchez n\'existe pas');
+            return $this->redirectToRoute('restorer_history');
+        }
+        $order->updateState();
+        $em->flush($order);
+        return $this->redirectToRoute('order_details_restorer',["id" => $order->getId()]);
     }
 
     /**
@@ -39,22 +94,29 @@ class RestorerController extends AbstractController
         ]);
     }
 
-
     /**
-     * @Route("/{id}", name="restorer_show", methods={"GET"})
+     * @Route("Infos", name="restorer_show", methods={"GET"})
      */
-    public function show(Restorer $restorer): Response
+    public function show(RestorerRepository $restorerRepository): Response
     {
+        $user = $this->security->getUser();
+        $id = $user->getId();
+        $restorer = $restorerRepository->find($id);
+
         return $this->render('restorer/show.html.twig', [
             'restorer' => $restorer,
         ]);
     }
 
     /**
-     * @Route("/edit/{id}", name="restorer_edit", methods={"GET","POST"})
+     * @Route("/Modifier", name="restorer_edit", methods={"GET","POST"})
      */
-    public function edit(Request $request, Restorer $restorer): Response
+    public function edit(Request $request, RestorerRepository $restorerRepository): Response
     {
+        $user = $this->security->getUser();
+        $id = $user->getId();
+        $restorer = $restorerRepository->find($id);
+
         $form = $this->createForm(RestorerType::class, $restorer);
         $form->handleRequest($request);
 
@@ -71,7 +133,7 @@ class RestorerController extends AbstractController
     }
 
     /**
-     * @Route("/{id}", name="restorer_delete", methods={"DELETE"})
+     * @Route("/Supprimer/{id}", name="restorer_delete", methods={"DELETE"})
      */
     public function delete(Request $request, Restorer $restorer): Response
     {

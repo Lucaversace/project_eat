@@ -12,13 +12,22 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
 /**
- * @Route("/dish")
+ * @Route("/Plats")
  */
 class DishController extends AbstractController
 {
+    /**
+     * @Route("/index", name="dish_index", methods={"GET"})
+     */
+    public function index(DishRepository $dishRepository): Response
+    {
+        return $this->render('dish/index.html.twig', [
+            'dishes' => $dishRepository->findAll(),
+        ]);
+    }
 
     /**
-     * @Route("/new", name="dish_new", methods={"GET","POST"})
+     * @Route("/Nouveau", name="dish_new", methods={"GET","POST"})
      */
     public function new(Request $request): Response
     {
@@ -49,19 +58,17 @@ class DishController extends AbstractController
     }
 
     /**
-     * @Route("/{id}", name="dish_show", methods={"GET"})
+     * @Route("/Infos/{id}", name="dish_show", methods={"GET"})
      */
     public function show(Dish $dish): Response
     {
-        
-
         return $this->render('dish/show.html.twig', [
             'dish' => $dish,
         ]);
     }
 
     /**
-     * @Route("/{id}/edit", name="dish_edit", methods={"GET","POST"})
+     * @Route("Modifier/{id}", name="dish_edit", methods={"GET","POST"})
      */
     public function edit(Request $request, Dish $dish): Response
     {
@@ -81,7 +88,7 @@ class DishController extends AbstractController
     }
 
     /**
-     * @Route("/{id}", name="dish_delete", methods={"DELETE"})
+     * @Route("/Supprimer/{id}", name="dish_delete", methods={"DELETE"})
      */
     public function delete(Request $request, Dish $dish): Response
     {

@@ -95,4 +95,8 @@ class CartService{
         return  $total;
     }
 
+    public function resetCart(){
+        $this->session->set('panier', []);
+    }
+
 }

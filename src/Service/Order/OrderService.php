@@ -6,27 +6,30 @@ use App\Entity\LineArticle;
 use App\Entity\Order;
 use App\Entity\StateOrder;
 use App\Service\Cart\CartService;
-use Symfony\Component\HttpFoundation\Session\SessionInterface;
+use DateTime;
+use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\Security\Core\Security;
 
 class OrderService{
 
     protected $cartService;
-    protected $session;
     protected $security;
+    protected $feeDelevery = 2.5;
+    protected $manager;
 
-    public function __construct( CartService $cartService, SessionInterface $session, Security $security)
+
+    public function __construct( CartService $cartService, Security $security, EntityManagerInterface $manager)
     {
         $this->cartService = $cartService;   
-        $this->session = $session;
         $this->security = $security;
+        $this->manager = $manager;
     }
 
     public function createOrder(): Order{
 
         $panier = $this->cartService->getFullCart();
 
-        $user = $this->session->get('user');
+        $user = $this->security->getUser();
 
         $order = new Order();
         $order->setUser($user);
@@ -45,14 +48,22 @@ class OrderService{
             $priceLine = $price * $quantity;
             $lineArticle->setPrice($priceLine);
             $totalOrder += $priceLine;
+            $totalOrder += $this->feeDelevery;
 
             $order->setPrice($totalOrder);
             $order->setRestaurant($product['product']->getRestaurant());
             $order->addLineArticle($lineArticle);
             $order->setStatus(StateOrder::IN_PROGRESS);
+            $order->setDate(new DateTime());
 
         }
         return $order;
     }
 
-}
+    public function saveOrder($order){
+
+        $this->manager->persist($order);
+        $this->manager->flush($order);
+    }
+
+}   
