@@ -75,7 +75,16 @@ class DishController extends AbstractController
         $form = $this->createForm(DishType::class, $dish);
         $form->handleRequest($request);
 
-        if ($form->isSubmitted() && $form->isValid()) {
+        if ($form->isSubmitted() && $form->isValid()){
+            $file = $form->get('dishFile')->getData();
+            if($file){
+                $filename = md5(uniqid()) . '.' . $file->guessExtension();
+                $file->move(
+                $this->getParameter('upload_dir'),
+                $filename
+                );
+                $dish->setImage($filename);
+            }
             $this->getDoctrine()->getManager()->flush();
 
             return $this->redirectToRoute('accueil');

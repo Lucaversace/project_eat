@@ -16,7 +16,7 @@
                         </div>
                     </div>
                     <div class="col col-contact">
-                        <div class="form-group modern-form__form-group--padding-l">{# <input class="form-control input input-tr" type="text" placeholder="Last Name"> #}
+                        <div class="form-group modern-form__form-group--padding-l">
                              {{ form_row(form.lastname,{'attr':{'class':'form-control input input-tr','placeholder':'Nom'},'label':' '}) }}
                             <div class="line-box">
                                 <div class="line"></div>
@@ -25,9 +25,18 @@
                     </div>
                 </div>
                 <div class="form-row" style="margin-top: 5px;">
-                    <div class="col">{# <input class="form-control input input-tr" type="text" placeholder="Email"> #}
+                    <div class="col">
                     {{ form_row(form.email,{'attr':{'class':'form-control input input-tr','placeholder':'Email'},'label':' '}) }}
-                  {{ form_row(form.password,{'attr':{'class':'form-control input input-tr','placeholder':'Mot de passe'},'label':' '}) }}</div>
+
+                    {# Condition pour ne pas avoir a retaper le mot de passe en modifiant #}
+                    
+                    {% if button_label == 'Update' %}
+                         {{ form_row(form.password,{'attr':{'class':'form-control input input-tr','placeholder':'Mot de passe'},'label':' ','required':false}) }}
+                     {% else %}
+                        {{ form_row(form.password,{'attr':{'class':'form-control input input-tr','placeholder':'Mot de passe'},'label':' '}) }}
+                    {% endif %}
+
+                  </div>
                 </div>  
 
                  <div class="form-row" style="margin-top: 5px;">
@@ -37,7 +46,7 @@
                 </div> 
                 <div class="form-row" style="height: 60px;">
                     <div class="col col-contact">
-                        <div class="form-group modern-form__form-group--padding-r">{# <input class="form-control input input-tr" type="text" placeholder="First Name"> #}
+                        <div class="form-group modern-form__form-group--padding-r">
                           {{ form_row(form.address.zipcode,{'attr':{'class':'form-control input input-tr','placeholder':'Code postal'},'label':' '}) }}
                             <div class="line-box">
                                 <div class="line"></div>
@@ -45,7 +54,7 @@
                         </div>
                     </div>
                     <div class="col col-contact">
-                        <div class="form-group modern-form__form-group--padding-l">{# <input class="form-control input input-tr" type="text" placeholder="Last Name"> #}
+                        <div class="form-group modern-form__form-group--padding-l">
                             {{ form_row(form.address.city,{'attr':{'class':'form-control input input-tr','placeholder':'Ville'},'label':' '}) }}
                             <div class="line-box">
                                 <div class="line"></div>
@@ -56,7 +65,6 @@
 
                 <div class="form-row">
                     <div class="col text-center">   
-                      {# <button class="btn btn-primary submit-now" type="submit">{{ button_label|default('S inscrire') }} #}
                       {{ form_row(form.submit,{'attr':{'class':'btn btn-primary submit-now'},'label':"Enregistrer"}) }}
                     </div>
                 </div>

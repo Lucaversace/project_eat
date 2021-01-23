@@ -22,7 +22,7 @@ use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 class IndexController extends AbstractController
 {
     /**
-     * @Route("/Accueil", name="accueil")
+     * @Route(" ", name="accueil")
      */
     public function index(RestorerRepository $restorerRepository): Response
     {

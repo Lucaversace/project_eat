@@ -13,7 +13,16 @@
                 </div>
                 <div class="col col-contact">
                     <div class="form-group modern-form__form-group--padding-l">
+
+                    {# Condition pour ne pas avoir a remettre une image en modifiant #}
+
+                    {% if button_label == 'Update' %}
+                            {{ form_row(form.dishFile,{'attr':{'class':'form-control input input-tr','placeholder':'Image'},'label':' ','required':false}) }}
+                    {% else %}
                             {{ form_row(form.dishFile,{'attr':{'class':'form-control input input-tr','placeholder':'Image'},'label':' '}) }}
+                    {% endif %}
+
+
                         <div class="line-box">
                             <div class="line"></div>
                         </div>

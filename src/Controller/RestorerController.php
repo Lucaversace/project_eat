@@ -14,6 +14,8 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Security\Core\Encoder\UserPasswordEncoder;
+use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 
 /**
  * @Route("/MonRestaurant")
@@ -111,9 +113,9 @@ class RestorerController extends AbstractController
     /**
      * @Route("/Modifier", name="restorer_edit", methods={"GET","POST"})
      */
-    public function edit(Request $request, RestorerRepository $restorerRepository): Response
+    public function edit(Request $request,UserPasswordEncoderInterface $encoder, RestorerRepository $restorerRepository): Response
     {
-        $user = $this->security->getUser();
+        $user = $this->getUser();
         $id = $user->getId();
         $restorer = $restorerRepository->find($id);
 
@@ -121,9 +123,22 @@ class RestorerController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+             /** @var UploadedFile */;
+             $file = $form->get('coverFile')->getData();
+             if($file){
+                $filename = md5(uniqid()) . '.' . $file->guessExtension();
+                $file->move(
+                    $this->getParameter('upload_dir'),
+                    $filename
+                );
+                $restorer->setImage($filename);
+            }
+
+            $hash = $encoder->encodePassword($restorer, $restorer->getPassword());
+            $restorer->setPassword($hash);
             $this->getDoctrine()->getManager()->flush();
 
-            return $this->redirectToRoute('restorer_index');
+            return $this->redirectToRoute('accueil');
         }
 
         return $this->render('restorer/edit.html.twig', [
