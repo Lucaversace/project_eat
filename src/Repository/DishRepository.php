@@ -36,15 +36,18 @@ class DishRepository extends ServiceEntityRepository
     }
     */
 
-    /*
-    public function findOneBySomeField($value): ?Dish
+
+    public function findDishByStatusAndUser($id): ?Dish
     {
-        return $this->createQueryBuilder('p')
-            ->andWhere('p.exampleField = :val')
-            ->setParameter('val', $value)
+        return $this->createQueryBuilder('d')
+            ->innerJoin('line_article', 'l', 'd.id = l.dish_id')
+            ->where("id_order_id IN ( SELECT id FROM `order` WHERE status = 'LIVRÉE' AND user_id = :id)")
+            ->setParameter('id', $id)
             ->getQuery()
             ->getOneOrNullResult()
         ;
     }
-    */
+
 }
+
+"SELECT * FROM `dish` as d INNER JOIN line_article AS l ON d.id = l.dish_id WHERE id_order_id IN ( SELECT id FROM `order` WHERE status = 'LIVRÉE' AND user_id = 57)";

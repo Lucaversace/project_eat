@@ -42,6 +42,11 @@ class Dish
      */
     private $restaurant;
 
+    /**
+     * @ORM\Column(type="integer", nullable=true)
+     */
+    private $note;
+
 
     public function getId(): ?int
     {
@@ -104,6 +109,18 @@ class Dish
     public function setRestaurant(?Restorer $restaurant): self
     {
         $this->restaurant = $restaurant;
+
+        return $this;
+    }
+
+    public function getNote(): ?int
+    {
+        return $this->note;
+    }
+
+    public function setNote(?int $note): self
+    {
+        $this->note = $note;
 
         return $this;
     }

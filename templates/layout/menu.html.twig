@@ -2,7 +2,6 @@
 
 <div class="header2 bg-success-gradiant">
   <div>
-    <!-- Header -->
     <nav class="navbar navbar-expand-lg h2-nav">
 				<span class="icon-menu"></span>
       {% if app.user %}
@@ -19,7 +18,6 @@
                 <li><a class="dropdown-item" href="{{path('restorer_order_history')}}">Historique de commandes</a></li>
                 <li><a class="dropdown-item" href="{{ path('restorer_edit', {'id': app.user.id }) }}">Informations Personnelles</a></li>
                 <li><a class="dropdown-item" href="{{path('dishs_restorer',{'id':app.user.id}) }}">Mes plats</a></li>
-{#                 <li><a class="dropdown-item" href="#">Tableau de bord</a></li> #}
               {% endif %}
               {% if app.user.roles[0] == "ROLE_USER" %}
                 <li><a class="dropdown-item" href="{{ path('user_client_history') }}">Historique de commandes</a></li>
@@ -27,38 +25,25 @@
                  <li><a class="dropdown-item" href="{{ path('user_client_solde')}}">Modifier mon solde</a></li>
                 <li class="divider" role="separator"></li>
                 <li><a class="dropdown-item" href="{{ path('cart_index') }}">Panier</a></li>
+                 <li class="divider" role="separator"></li>
+                <li><a class="dropdown-item" href="{{ path('note_client')}}">Noter mes plats</a></li>
                 <li class="divider" role="separator"></li>
                 <li><a class="dropdown-item disabled" href="#">Solde - {% if app.user.wallet == null %} 0.0{% else %} {{app.user.wallet}} {% endif %} €</a></li>
               {% endif %}
+              {% if app.user.roles[0] == "ROLE_ADMIN" %}
+              <li><a class="dropdown-item" href="#">Tableau de bord</a></li>
+                <li class="divider" role="separator"></li>
+                <li><a class="dropdown-item" href="{{ path('restorer_index') }}">Les restaurants</a></li>
+                 <li class="divider" role="separator"></li>
+                <li><a class="dropdown-item" href="{{ path('admin_client_index')}}">Les utilisateurs</a></li>
+                <li class="divider" role="separator"></li>
+              {% endif %}
         {% endif %}
-              
-              
-              
-             {#   SOUS-DROPDOWN   #} 
-             {# <li class="dropdown-submenu position-relative"> <a class="dropdown-toggle dropdown-item" data-toggle="dropdown" href="#">Dropdown <i class="icon-arrow-right float-right mt-1"></i></a>
-                 <ul class="dropdown-menu">
-                  <li><a class="dropdown-item" href="#">Action</a></li>
-                  <li class="dropdown-submenu position-relative"> <a class="dropdown-toggle dropdown-item" href="#" data-toggle="dropdown">Dropdown <i class="icon-arrow-right float-right mt-1"></i></a>
-                    <ul class="nav navbar-nav dropdown-menu">
-                      <li class="dropdown-submenu position-relative"> <a class="dropdown-toggle dropdown-item" href="#" data-toggle="dropdown">Dropdown <i class="icon-arrow-right float-right mt-1"></i></a>
-                        <ul class="dropdown-menu">
-                          <li><a class="dropdown-item" href="#">Action</a></li>
-                          <li><a class="dropdown-item" href="#">Another action</a></li>
-                          <li><a class="dropdown-item" href="#">Something else here</a></li>
-                          <li class="divider" role="separator"></li>
-                          <li><a class="dropdown-item" href="#">Separated link</a></li>
-                          <li class="divider" role="separator"></li>
-                          <li><a class="dropdown-item" href="#">One more separated link</a></li>
-                        </ul>
-                      </li>
-                    </ul>
-                  </li>
-                </ul> 
-              </li>#} 
+
             </ul>
           </li>
           <li id="logo">
-          <a class=" " href="{{ path('accueil')}}"><img id="logo" src="/img/logo.png" alt="wrapkit" /></a>  
+          <a {% if app.user.roles[0] == "ROLE_USER" or app.user.roles[0] == "ROLE_RESTORER"%} href="{{ path('accueil')}}"{% else %} href="#" {% endif %}><img id="logo" src="/img/logo.png" alt="wrapkit" /></a>  
            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#header2" aria-controls="header2" aria-expanded="false" aria-label="Toggle navigation"> </li>
         </ul>
         {%  if  not app.user %}
@@ -73,7 +58,6 @@
         {% endif %}
       </div>
     </nav>
-    <!-- End Header 1 code -->
   </div>
 </div>
 

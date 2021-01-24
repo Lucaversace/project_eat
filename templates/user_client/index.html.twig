@@ -25,14 +25,13 @@
                 <td>{{ user_client.firstname }}</td>
                 <td>{{ user_client.lastname }}</td>
                 <td>
-                    {# <a href="{{ path('user_client_show', {'id': user_client.id}) }}">show</a> #}
-                    <a href="{{ path('user_client_edit', {'id': user_client.id}) }}" style="color:#009879">Modifier</a>
-                    <a href="{{ path('user_client_show', {'id': user_client.id}) }}" style="color:#009879;margin-left:30px;">Supprimer</a>
+                    <a href="{{ path('admin_client_edit', {'id': user_client.id}) }}" style="color:#009879">Modifier</a>
+                    <a href="{{ path('admin_client_show', {'id': user_client.id}) }}" style="color:#009879; margin-left:30px;">Supprimer</a>
                 </td>
             </tr>
         {% else %}
             <tr>
-                <td colspan="7">no records found</td>
+                <td colspan="7">Aucun utilisateur trouvé</td>
             </tr>
         {% endfor %}
         </tbody>

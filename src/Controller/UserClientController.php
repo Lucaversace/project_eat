@@ -4,9 +4,11 @@ namespace App\Controller;
 
 use App\Entity\Order;
 use App\Entity\UserClient;
+use App\Form\NoteType;
 use App\Form\UserClientType;
-use App\Form\WalletType;
+/* use App\Form\WalletType; */
 use App\Repository\LineArticleRepository;
+use App\Repository\DishRepository;
 use App\Repository\UserClientRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -47,6 +49,32 @@ class UserClientController extends AbstractController
         
         return $this->render('user_client/detailsOrder.html.twig', [
             'order' => $order,
+        ]);
+    }
+
+        /**
+     * @Route("/MesNotes", name="note_client", methods={"GET"})
+     */
+    public function myNotes(Request $request, DishRepository $dishRepository): Response
+    {
+        $user = $this->getUser();
+        $idUser = $user->getId();
+        
+        $dishs = $dishRepository->findDishByStatusAndUser($idUser);
+        dd($dishs);
+
+
+        $form = $this->createForm(NoteType::class, $user);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $this->getDoctrine()->getManager()->flush();
+
+            return $this->redirectToRoute('note_client');
+        }
+
+        return $this->render('user_client/notes.html.twig', [
+            'dishs' => $dishs,
         ]);
     }
 
