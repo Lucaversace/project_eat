@@ -45,7 +45,7 @@ abstract class User implements UserInterface
     private $address;
 
     /**
-     * @ORM\OneToMany(targetEntity=Order::class, mappedBy="user")
+     * @ORM\OneToMany(targetEntity=Order::class, mappedBy="user", cascade={"remove"})
      */
     private $orders;
 

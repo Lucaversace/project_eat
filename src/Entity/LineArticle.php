@@ -18,7 +18,7 @@ class LineArticle
     private $id;
 
     /**
-     * @ORM\ManyToOne(targetEntity=Dish::class)
+     * @ORM\ManyToOne(targetEntity=Dish::class, cascade={"remove"})
      * @ORM\JoinColumn(nullable=false)
      */
     private $dish;

@@ -5,8 +5,6 @@ namespace App\Controller;
 use App\Entity\Order;
 use App\Entity\Restorer;
 use App\Form\RestorerType;
-use App\Repository\DishRepository;
-use App\Repository\LineArticleRepository;
 use App\Repository\OrderRepository;
 use App\Repository\RestorerRepository;
 use Doctrine\ORM\EntityManagerInterface;

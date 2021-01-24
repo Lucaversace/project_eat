@@ -37,14 +37,15 @@ class OrderRepository extends ServiceEntityRepository
     */
 
 
-    public function findOrderByRestaurant($restau)
+/*     public function findOrderByStatus($id)
     {
         return $this->createQueryBuilder('o')
             ->select('o')
-            ->where('o.restaurant = :id')
-            ->setParameter('id', $restau)
+            ->where('o.status = LIVRÉE AND o.userId = :id')
+            ->setParameter('id', $id)
             ->getQuery()
             ->getResult()
         ;
-    }
+    } */
 }
+
