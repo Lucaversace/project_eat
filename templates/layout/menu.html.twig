@@ -31,7 +31,7 @@
                 <li><a class="dropdown-item disabled" href="#">Solde - {% if app.user.wallet == null %} 0.0{% else %} {{app.user.wallet}} {% endif %} €</a></li>
               {% endif %}
               {% if app.user.roles[0] == "ROLE_ADMIN" %}
-              <li><a class="dropdown-item" href="#">Tableau de bord</a></li>
+              <li><a class="dropdown-item" href="{{path('dashboard')}}">Tableau de bord</a></li>
                 <li class="divider" role="separator"></li>
                 <li><a class="dropdown-item" href="{{ path('restorer_index') }}">Les restaurants</a></li>
                  <li class="divider" role="separator"></li>
@@ -43,16 +43,10 @@
             </ul>
           </li>
           <li id="logo">
-        
-          {% if app.user and app.user.roles[0] == "ROLE_ADMIN" %}
-          <a  href="#">
-          {% else %}
-           <a  href="{{ path('accueil')}}" >
-           {% endif %}
-           <img id="logo" src="/img/logo.png" alt="wrapkit" /></a> 
-          
-      
-           <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#header2" aria-controls="header2" aria-expanded="false" aria-label="Toggle navigation"> </li>
+            <a {% if app.user and app.user.roles[0] == "ROLE_ADMIN" %} href="{{path('dashboard')}}" {% else %} href="{{ path('accueil')}}" {% endif %}>
+              <img id="logo" src="/img/logo.png" alt="wrapkit"/>
+            </a>  
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#header2" aria-controls="header2" aria-expanded="false" aria-label="Toggle navigation"> </li>
         </ul>
         {%  if  not app.user %}
         <ul class="navbar-nav ml-auto">
@@ -69,4 +63,4 @@
   </div>
 </div>
 
-{% endblock %}
+{% endblock %} 

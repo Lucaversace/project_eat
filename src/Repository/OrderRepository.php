@@ -46,8 +46,7 @@ class OrderRepository extends ServiceEntityRepository
             ->getQuery()
             ->getResult()
         ;
-    } */
-
+    } */ 
 
     public function findOrderByRestaurant($restau)
     {
