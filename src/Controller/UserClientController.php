@@ -6,6 +6,7 @@ use App\Entity\Order;
 use App\Entity\UserClient;
 use App\Form\NoteType;
 use App\Form\UserClientType;
+use App\Form\WalletType;
 /* use App\Form\WalletType; */
 use App\Repository\LineArticleRepository;
 use App\Repository\DishRepository;

@@ -47,5 +47,17 @@ class OrderRepository extends ServiceEntityRepository
             ->getResult()
         ;
     } */
+
+
+    public function findOrderByRestaurant($restau)
+    {
+        return $this->createQueryBuilder('o')
+            ->select('o')
+            ->where('o.restaurant = :id')
+            ->setParameter('id', $restau)
+            ->getQuery()
+            ->getResult()
+        ;
+    }
 }
 

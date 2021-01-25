@@ -4,8 +4,6 @@
 
 {% block body %}
 
-
-
 <section class="pricing-table">
    <div class="container">
          <div class="center">
@@ -20,7 +18,7 @@
                             <h1 style="font-family: Roboto, sans-serif;">{{order.user.firstname}} {{order.user.lastname}}</h1>
                         </li>
                         {% for article in order.lineArticle %}
-                            <li class="list-group-item"><span>Produit {{loop.index}} : {{article.dish.nom}}</span></li>
+                            <li class="list-group-item"><span>{{article.quantity}} x {{article.dish.nom}} : {{article.price}} €</span></li>
                         {% endfor %}
                             <li class="list-group-item"><span>Etat : {{order.status}}</span></li>
                             <li class="list-group-item"><span><td>Total : {{order.price}} €</td></span></li>

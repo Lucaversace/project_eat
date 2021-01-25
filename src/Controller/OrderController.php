@@ -37,17 +37,27 @@ class OrderController extends AbstractController
         if($paymentService->debit($priceOrder)){
             $orderService->saveOrder($order);
             $cartService->resetCart();
+            $pathButton = "accueil";
+            $textButton= "Retour à l'accueil";
+            $imgSrc = "/img/check.png";
             $this->addFlash(
                 "success",
-                "Votre paiement à bien été pris en compte, votre commande est en cours et vous allez recevoir un récapitulatif par mail."
+                "Votre paiement à bien été pris en compte, votre commande est en cours ! "
             );
         }else{
+            $pathButton = "user_client_solde";
+            $textButton= "Modifier mon solde";
+            $imgSrc = "/img/false.png";
              $this->addFlash(
                 "danger",
                 "Désolé, vous n'avez pas le solde suffisant pour payer la commande."
             );
         }
 
-        return $this->render('order/payment.html.twig');
+        return $this->render('order/payment.html.twig', [
+            'pathButton' => $pathButton,
+            'textButton' => $textButton,
+            'imgSrc' => $imgSrc
+        ]);
     }
 }

@@ -43,7 +43,15 @@
             </ul>
           </li>
           <li id="logo">
-          <a {% if app.user.roles[0] == "ROLE_USER" or app.user.roles[0] == "ROLE_RESTORER"%} href="{{ path('accueil')}}"{% else %} href="#" {% endif %}><img id="logo" src="/img/logo.png" alt="wrapkit" /></a>  
+        
+          {% if app.user and app.user.roles[0] == "ROLE_ADMIN" %}
+          <a  href="#">
+          {% else %}
+           <a  href="{{ path('accueil')}}" >
+           {% endif %}
+           <img id="logo" src="/img/logo.png" alt="wrapkit" /></a> 
+          
+      
            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#header2" aria-controls="header2" aria-expanded="false" aria-label="Toggle navigation"> </li>
         </ul>
         {%  if  not app.user %}

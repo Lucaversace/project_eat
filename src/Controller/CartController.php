@@ -24,14 +24,14 @@ class CartController extends AbstractController
     }
 
     /**
-     * @Route("/cart/add/{id}", name="cart_add")
+     * @Route("/cart/add/{id}/{idResto}", name="cart_add")
      */
-    public function add($id, CartService $cartService): Response
+    public function add($id, $idResto, CartService $cartService): Response
     {
-
         $cartService->add($id);
 
-        return $this->redirectToRoute("cart_index");
+        return $this->redirectToRoute('restaurant', ['id' => $idResto ]);
+        
     }
 
     /**
