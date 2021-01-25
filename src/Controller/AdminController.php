@@ -41,13 +41,18 @@ class AdminController extends AbstractController
             $nbOrdersFinished ++;
         }
 
+        $benefits  = $nbOrders * 2.5;
+         
         return $this->render('admin/index.html.twig', [
             'nbRestorers' => $nbRestorers,
             'nbOrders' => $nbOrders,
             'nbOrdersFinished' => $nbOrdersFinished,
-            'benefit' =>  $benefits = $nbOrders * 2.5
+            'benefits' =>  $benefits
         ]);
+
+        
     }
+ 
 
     /**
      * @Route("/Restaurants", name="restorer_index", methods={"GET"})

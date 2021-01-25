@@ -4,9 +4,50 @@
 
 {% block body %}
 
-    <h4> Nombre de restaurants {{ nbRestorers }}</h4>
-    <h4> Nombre de commandes passées {{ nbOrders }}</h4>
-    <h4> Nombre de commandes terminés {{ nbOrdersFinished }}</h4>
-    <h4> Bénéfices {{ benefits }}</h4>
-    
+<div class="text-center">
+    <h4 style="color: #212529;font-size: 45px; margin-top:60px">Tableau de bord</h4>
+</div>
+<hr class="modern-form__hr">
+
+
+<div class="row" style="padding-left: 300px;padding-right: 300px;margin:0;">
+    <div class="col d-flex flex-row justify-content-between" style="background: #009879;padding-top: 5px;margin-top: 50px; box-shadow: 9px 11px 20px 11px rgb(215,215,215);">
+        <p class="d-xl-flex justify-content-xl-start" style="font-size: 20px;color: rgb(255,255,255);">NOMBRE DE RESTAURANTS</p>
+        <p style="font-size: 25px;color: rgb(255,255,255);">{{ nbRestorers }}</p>
+    </div>
+</div>
+<div class="row" style="padding-left: 300px;padding-right: 300px;margin:0;">
+    <div class="col d-flex flex-row justify-content-between" style="background: #009879;padding-top: 5px;margin-top: 50px;box-shadow: 9px 11px 20px 11px rgb(215,215,215);">
+        <p class="d-xl-flex justify-content-xl-start" style="font-size: 20px;color: rgb(255,255,255);">NOMBRE DE COMMANDES</p>
+        <p style="font-size: 25px;color: rgb(255,255,255);">{{ nbOrders }}</p>
+    </div>
+</div>
+<div class="row" style="padding-left: 300px;padding-right: 300px;margin:0;">
+    <div class="col d-flex flex-row justify-content-between" style="background: #009879;padding-top: 5px;margin-top: 50px;box-shadow: 9px 11px 20px 11px rgb(215,215,215);">
+        <p class="d-xl-flex justify-content-xl-start" style="font-size: 20px;color: rgb(255,255,255);">NOMBRE DE COMMANDES FINIES</p>
+        <p style="font-size: 25px;color: rgb(255,255,255);">{{ nbOrdersFinished }}</p>
+    </div>
+</div>
+<div class="row" style="padding-left: 300px;padding-right: 300px;margin:0;">
+    <div class="col d-flex flex-row justify-content-between" style="background: #009879;padding-top: 5px;margin-top: 50px;box-shadow: 9px 11px 20px 11px rgb(215,215,215);">
+        <p class="d-xl-flex justify-content-xl-start" style="font-size: 20px;color: rgb(255,255,255);">BENEFICE</p>
+        <p style="font-size: 25px;color: rgb(255,255,255);">{{ benefits }}</p>
+    </div>
+</div>
+
+<div style="margin-top: 55px;">
+        <div class="container">
+            <div class="row">
+               
+                <div class="col-md-6" style="text-align: center;"> <a class="btn btn-primary" type="button" href="{{path('restorer_index')}}" style="background: #009879;border-style: none;margin-top: 20px;font-size: 20px;padding:15px;">Liste des Restaurants</a></div>
+                <div class="col-md-6" style="text-align: center;"> <a class="btn btn-primary" type="button" href="{{path('admin_client_index')}}" style="background: #009879;border-style: none;margin-top: 20px;font-size: 20px;padding:15px;">Liste des Utilisateurs</a></div>
+            </div>
+        </div>
+</div>
 {% endblock %}
+
+
+
+
+
+
