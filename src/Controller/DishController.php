@@ -75,10 +75,19 @@ class DishController extends AbstractController
         $form = $this->createForm(DishType::class, $dish);
         $form->handleRequest($request);
 
-        if ($form->isSubmitted() && $form->isValid()) {
+        if ($form->isSubmitted() && $form->isValid()){
+            $file = $form->get('dishFile')->getData();
+            if($file){
+                $filename = md5(uniqid()) . '.' . $file->guessExtension();
+                $file->move(
+                $this->getParameter('upload_dir'),
+                $filename
+                );
+                $dish->setImage($filename);
+            }
             $this->getDoctrine()->getManager()->flush();
 
-            return $this->redirectToRoute('dish_index');
+            return $this->redirectToRoute('accueil');
         }
 
         return $this->render('dish/edit.html.twig', [
@@ -98,9 +107,6 @@ class DishController extends AbstractController
             $entityManager->flush();
         }
 
-        $this->get('security.context')->setToken(null);
-        $this->get('request')->getSession()->invalidate();
-
-        return $this->redirectToRoute('dishs_restorer');
+        return $this->redirectToRoute('accueil');
     }
 }

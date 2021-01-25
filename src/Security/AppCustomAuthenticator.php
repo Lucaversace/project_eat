@@ -101,7 +101,7 @@ class AppCustomAuthenticator extends AbstractFormLoginAuthenticator implements P
 
         switch ($role[0]) {
             case "ROLE_ADMIN":
-                return new RedirectResponse($this->urlGenerator->generate('admin'));
+                return new RedirectResponse($this->urlGenerator->generate('dashboard'));
                 break;
             case "ROLE_RESTORER":
                 return new RedirectResponse($this->urlGenerator->generate('accueil'));

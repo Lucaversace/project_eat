@@ -6,12 +6,14 @@ use App\Entity\Order;
 use App\Entity\UserClient;
 use App\Form\NoteType;
 use App\Form\UserClientType;
+use App\Form\WalletType;
 use App\Repository\DishRepository;
 use App\Repository\UserClientRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 
 /**
  * @Route("/")
@@ -78,7 +80,7 @@ class UserClientController extends AbstractController
     /**
      * @Route("/Informations", name="user_client_edit", methods={"GET","POST"})
      */
-    public function edit(Request $request, UserClientRepository $userClientRepository): Response
+    public function edit(Request $request,UserPasswordEncoderInterface $encoder,UserClientRepository $userClientRepository): Response
     {
         $user = $this->getUser();
         $id = $user->getId();
@@ -88,6 +90,10 @@ class UserClientController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+
+
+            $hash = $encoder->encodePassword($userClient, $userClient->getPassword());
+            $userClient->setPassword($hash);
             $this->getDoctrine()->getManager()->flush();
 
             return $this->redirectToRoute('accueil');
@@ -112,4 +118,33 @@ class UserClientController extends AbstractController
 
         return $this->redirectToRoute('user_client_index');
     }
+
+
+
+
+    /**
+     * @Route("/Solde", name="user_client_solde", methods={"GET","POST"})
+     */
+    public function edit_solde(Request $request, UserClientRepository $userClientRepository): Response
+    {
+        $user = $this->getUser();
+        $id = $user->getId();
+        $userClient = $userClientRepository->find($id);
+
+        $form = $this->createForm(WalletType::class, $userClient);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $this->getDoctrine()->getManager()->flush();
+
+            return $this->redirectToRoute('accueil');
+        }
+
+        return $this->render('user_client/edit_solde.html.twig', [
+            'user_client' => $userClient,
+            'form' => $form->createView(),
+        ]);
+    }
 }
+
+

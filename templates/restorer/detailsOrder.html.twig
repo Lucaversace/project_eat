@@ -1,7 +1,37 @@
 {% extends 'base.html.twig' %}
 
+{% block title %}Historique {% endblock %}
+
 {% block body %}
-    <div>
+
+
+<section class="pricing-table">
+   <div class="container">
+         <div class="center">
+             <h2 style="font-family: Roboto, sans-serif;">Commande du client {{order.user.firstname}} {{order.user.lastname}}</h2>
+             <p class="lead" style="font-family: Roboto, sans-serif;">Commande passé le {{order.date | date('d-m-Y à H:i')}}</p>
+         </div>
+        <div class="pricing-area text-center">
+            <div class="row d-xl-flex justify-content-xl-center">
+                <div class="col-sm-4 plan price red wow fadeInDown">
+                    <ul class="list-group">
+                        <li class="list-group-item heading" style="width: 373px;background: #009879;">
+                            <h1 style="font-family: Roboto, sans-serif;">{{order.restaurant.restaurantName}}</h1>
+                        </li>
+                        {% for article in order.lineArticle %}
+                            <li class="list-group-item"><span>Produit {{loop.index}} : {{article.dish.nom}}</span></li>
+                        {% endfor %}
+                            <li class="list-group-item"><span>Etat : <a class="btn btn-secondary" href="{{path('order_update', {'id': order.id})}}">{{order.status}}</a></span></li>
+                            <li class="list-group-item"><span><td>Total : {{order.price}} €</td></span></li>
+                    </ul>
+                 </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+{#     <div>
         <table>
             <tr>
                 <td>Client</td>
@@ -30,5 +60,5 @@
                 <td>{{order.price}}</td>
             </tr>
         </table>
-    </div>
+    </div> #}
 {% endblock %}

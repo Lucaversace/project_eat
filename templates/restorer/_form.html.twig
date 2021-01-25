@@ -1,14 +1,11 @@
 {{ form_start(form) }}
 <div class="container modern-form">
-{#         <div class="text-center">
-            <h4 style="color: #212529;font-size: 45px;">Inscrire mon restaurant</h4>
-        </div> #}
-{#         <hr class="modern-form__hr"> #}
+
         <div class="modern-form__form-container">
             <form>
                 <div class="form-row" style="height: 60px;">
                     <div class="col col-contact">
-                        <div class="form-group modern-form__form-group--padding-r">{# <input class="form-control input input-tr" type="text" placeholder="First Name"> #}
+                        <div class="form-group modern-form__form-group--padding-r">
                          {{ form_row(form.restaurantName,{'attr':{'class':'form-control input input-tr','placeholder':'Nom du restaurant'},'label':' '}) }}
                             <div class="line-box">
                                 <div class="line"></div>
@@ -16,8 +13,12 @@
                         </div>
                     </div>
                     <div class="col col-contact">
-                        <div class="form-group modern-form__form-group--padding-l">{# <input class="form-control input input-tr" type="text" placeholder="Last Name"> #}
+                    {% if button_label == 'Update' %}
+                             {{ form_row(form.coverFile,{'attr':{'class':'form-control input input-tr','placeholder':'Image'},'label':' ','required':false}) }}
+                    {% else %}
                              {{ form_row(form.coverFile,{'attr':{'class':'form-control input input-tr','placeholder':'Image'},'label':' '}) }}
+                    {% endif %}
+
                             <div class="line-box">
                                 <div class="line"></div>
                             </div>
@@ -25,9 +26,19 @@
                     </div>
                 </div>
                 <div class="form-row" style="margin-top: 5px;">
-                    <div class="col">{# <input class="form-control input input-tr" type="text" placeholder="Email"> #}
+                    <div class="col">
                     {{ form_row(form.email,{'attr':{'class':'form-control input input-tr','placeholder':'Email'},'label':' '}) }}
-                  {{ form_row(form.password,{'attr':{'class':'form-control input input-tr','placeholder':'Mot de passe'},'label':' '}) }}</div>
+
+                    {# Condition pour ne pas avoir a retaper le mot de passe en modifiant #}
+
+
+                {% if button_label == 'Update' %}
+                        {{ form_row(form.password,{'attr':{'class':'form-control input input-tr','placeholder':'Mot de passe'},'label':' ','required':false}) }}
+                {% else %}
+                        {{ form_row(form.password,{'attr':{'class':'form-control input input-tr','placeholder':'Mot de passe'},'label':' '}) }}
+                {% endif %}
+                  
+                  </div>
                 </div>  
 
                  <div class="form-row" style="margin-top: 5px;">

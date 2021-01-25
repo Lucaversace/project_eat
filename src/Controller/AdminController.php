@@ -6,6 +6,7 @@ use App\Entity\Restorer;
 use App\Entity\UserClient;
 use App\Form\RestorerType;
 use App\Form\UserClientType;
+use App\Repository\OrderRepository;
 use App\Repository\RestorerRepository;
 use App\Repository\UserClientRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -20,16 +21,35 @@ use Symfony\Component\Routing\Annotation\Route;
 class AdminController extends AbstractController
 {
     /**
-     * @Route("/Index", name="admin")
+     * @Route("/TableauDeBord", name="dashboard")
      */
-    public function index(): Response
+    public function dashboard(RestorerRepository $restorerRepository, OrderRepository $orderRepository): Response
     {
+        $restorers = $restorerRepository->findAll();
+        $nbRestorers = 0;
+        foreach($restorers as $restorer){
+            $nbRestorers ++;
+        }
+        $nbOrders = 0;
+        $orders = $orderRepository->findAll();
+        foreach($orders as $order){
+            $nbOrders ++;
+        }
+        $nbOrdersFinished = 0;
+        $ordersFinished = $orderRepository->findBy(['status' => 'LIVRÉE']);
+        foreach($ordersFinished as $orderFinished){
+            $nbOrdersFinished ++;
+        }
+
         return $this->render('admin/index.html.twig', [
-            'controller_name' => 'AdminController',
+            'nbRestorers' => $nbRestorers,
+            'nbOrders' => $nbOrders,
+            'nbOrdersFinished' => $nbOrdersFinished,
+            'benefit' =>  $benefits = $nbOrders * 2.5
         ]);
     }
 
-        /**
+    /**
      * @Route("/Restaurants", name="restorer_index", methods={"GET"})
      */
     public function restorers(RestorerRepository $restorerRepository): Response
@@ -49,7 +69,7 @@ class AdminController extends AbstractController
         ]);
     }
 
-        /**
+    /**
      * @Route("/Utilisateur/Edition/{id}", name="admin_client_edit", methods={"GET","POST"})
      */
     public function editClient(Request $request, UserClient $userClient): Response
@@ -69,7 +89,7 @@ class AdminController extends AbstractController
         ]);
     }
 
-        /**
+    /**
      * @Route("/Restaurants/Edition/{id}", name="admin_edit_restorer", methods={"GET","POST"})
      */
     public function editRestorer(Request $request, Restorer $restorer): Response
@@ -89,7 +109,7 @@ class AdminController extends AbstractController
         ]);
     }
 
-        /**
+    /**
      * @Route("/Supprimer/{id}", name="admin_delete_restorer", methods={"DELETE"})
      */
     public function deleteRestorer(Request $request, Restorer $restorer): Response
@@ -103,7 +123,7 @@ class AdminController extends AbstractController
         return $this->redirectToRoute('restorer_index');
     }
 
-        /**
+    /**
      * @Route("/delete/{id}", name="admin_client_delete", methods={"DELETE"})
      */
     public function deleteClient(Request $request, UserClient $userClient): Response
@@ -127,7 +147,7 @@ class AdminController extends AbstractController
         ]);
     }
 
-        /**
+    /**
      * @Route("/Restaurant/Infos/{id}", name="admin_restorer_show", methods={"GET"})
      */
     public function showRestorer(Restorer $restorer): Response
