@@ -49,6 +49,18 @@ class LineArticleRepository extends ServiceEntityRepository
         ;
     }
 
+
+
+    public function findDishByStatusAndUser($user)
+    {
+        return $this->createQueryBuilder('l')
+            ->join('l.idOrder', 'o')
+            ->where("o.status = 'LIVRÉE'")
+            ->andWhere("o.user = :user")
+            ->setParameter('user', $user)
+            ->getQuery()
+            ->getResult()
+        ;
+    }
+
 }
-/* "SELECT * FROM `order` as o INNER JOIN line_article as la ON o.id = la.id_order_id WHERE o.id = 1";
- */
