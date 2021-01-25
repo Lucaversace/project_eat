@@ -3,7 +3,9 @@
 namespace App\Repository;
 
 use App\Entity\Dish;
+use App\Entity\LineArticle;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\Persistence\ManagerRegistry;
 
 /**
@@ -14,8 +16,11 @@ use Doctrine\Persistence\ManagerRegistry;
  */
 class DishRepository extends ServiceEntityRepository
 {
-    public function __construct(ManagerRegistry $registry)
+    protected $em;
+
+    public function __construct(ManagerRegistry $registry, EntityManagerInterface $em)
     {
+        $this->em = $em;
         parent::__construct($registry, Dish::class);
     }
 
@@ -36,18 +41,4 @@ class DishRepository extends ServiceEntityRepository
     }
     */
 
-
-    public function findDishByStatusAndUser($id): ?Dish
-    {
-        return $this->createQueryBuilder('d')
-            ->innerJoin('line_article', 'l', 'd.id = l.dish_id')
-            ->where("id_order_id IN ( SELECT id FROM `order` WHERE status = 'LIVRÉE' AND user_id = :id)")
-            ->setParameter('id', $id)
-            ->getQuery()
-            ->getOneOrNullResult()
-        ;
-    }
-
 }
-
-"SELECT * FROM `dish` as d INNER JOIN line_article AS l ON d.id = l.dish_id WHERE id_order_id IN ( SELECT id FROM `order` WHERE status = 'LIVRÉE' AND user_id = 57)";

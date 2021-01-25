@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\DishRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -46,6 +48,21 @@ class Dish
      * @ORM\Column(type="integer", nullable=true)
      */
     private $note;
+
+    /**
+     * @ORM\Column(type="integer", nullable=true)
+     */
+    private $NbNote;
+
+    /**
+     * @ORM\OneToMany(targetEntity=Note::class, mappedBy="dish", orphanRemoval=true)
+     */
+    private $notes;
+
+    public function __construct()
+    {
+        $this->notes = new ArrayCollection();
+    }
 
 
     public function getId(): ?int
@@ -121,6 +138,48 @@ class Dish
     public function setNote(?int $note): self
     {
         $this->note = $note;
+
+        return $this;
+    }
+
+    public function getNbNote(): ?int
+    {
+        return $this->NbNote;
+    }
+
+    public function setNbNote(?int $NbNote): self
+    {
+        $this->NbNote = $NbNote;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Note[]
+     */
+    public function getNotes(): Collection
+    {
+        return $this->notes;
+    }
+
+    public function addNote(Note $note): self
+    {
+        if (!$this->notes->contains($note)) {
+            $this->notes[] = $note;
+            $note->setDish($this);
+        }
+
+        return $this;
+    }
+
+    public function removeNote(Note $note): self
+    {
+        if ($this->notes->removeElement($note)) {
+            // set the owning side to null (unless already changed)
+            if ($note->getDish() === $this) {
+                $note->setDish(null);
+            }
+        }
 
         return $this;
     }

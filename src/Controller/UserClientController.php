@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Entity\Note;
 use App\Entity\Order;
 use App\Entity\UserClient;
 use App\Form\NoteType;
@@ -52,29 +53,44 @@ class UserClientController extends AbstractController
         ]);
     }
 
-        /**
-     * @Route("/MesNotes", name="note_client", methods={"GET"})
+     /**
+     * @Route("/MesNotes", name="note_client", methods={"GET", "POST"})
      */
-    public function myNotes(Request $request, DishRepository $dishRepository): Response
+    public function myNotes(Request $request, LineArticleRepository $lineArticleRepository, DishRepository $dishRepository): Response
     {
         $user = $this->getUser();
-        $idUser = $user->getId();
         
-        $dishs = $dishRepository->findDishByStatusAndUser($idUser);
-        dd($dishs);
+        $lineArticles = $lineArticleRepository->findDishByStatusAndUser($user);
 
+        $formulaires = [];
+        $dishs = [];
 
-        $form = $this->createForm(NoteType::class, $user);
-        $form->handleRequest($request);
+        $note = new Note();
+        
+        foreach($lineArticles as $lineArticle){
 
-        if ($form->isSubmitted() && $form->isValid()) {
-            $this->getDoctrine()->getManager()->flush();
+            $dish = $lineArticle->getDish();
+            $dishs[] = $dish;
 
-            return $this->redirectToRoute('note_client');
+            $form = $this->createForm(NoteType::class, $note);
+            $form->handleRequest($request);
+            $form1 = $form->createView();
+            $formulaires[] = $form1;
         }
+            if ($form->isSubmitted() && $form->isValid()) {
+                dd($form->get('dish')->getData());  
+                $note->setUserClient($user)
+                     ->setDish($form->get('dish')->getData())
+                ;
 
+                $this->getDoctrine()->getManager()->flush();
+                return $this->redirectToRoute('note_client');
+            }
+        
         return $this->render('user_client/notes.html.twig', [
-            'dishs' => $dishs,
+            'formulaires' => $formulaires,
+            'lineArticles' => $lineArticles,
+            'dishs' => $dishs
         ]);
     }
 

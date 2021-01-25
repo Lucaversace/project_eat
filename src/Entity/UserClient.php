@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\UserClientRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -24,6 +26,17 @@ class UserClient extends User
      * @ORM\Column(type="float", nullable=true)
      */
     private $wallet;
+
+    /**
+     * @ORM\OneToMany(targetEntity=Note::class, mappedBy="userClient")
+     */
+    private $notes;
+
+    public function __construct()
+    {
+        parent::__construct();
+        $this->notes = new ArrayCollection();
+    }
 
     /**
      * @return mixed
@@ -65,6 +78,36 @@ class UserClient extends User
     public function setWallet(?float $wallet): self
     {
         $this->wallet = $wallet;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Note[]
+     */
+    public function getNotes(): Collection
+    {
+        return $this->notes;
+    }
+
+    public function addNote(Note $note): self
+    {
+        if (!$this->notes->contains($note)) {
+            $this->notes[] = $note;
+            $note->setUserClient($this);
+        }
+
+        return $this;
+    }
+
+    public function removeNote(Note $note): self
+    {
+        if ($this->notes->removeElement($note)) {
+            // set the owning side to null (unless already changed)
+            if ($note->getUserClient() === $this) {
+                $note->setUserClient(null);
+            }
+        }
 
         return $this;
     }
