@@ -34,7 +34,7 @@
     <div class="row text-left" style="width: 100%;margin-bottom: 50px;">
        
        {% for restorer in restorers %}
-        {# {% if 'https' not in restorer.image  %} #} 
+        {% if 'https' not in restorer.image  %} 
         <div class="col text-left" style="width: 100%;margin-left: 50px;">
                             {# NO TRESPASSING #}
 
@@ -45,7 +45,7 @@
                 <p>Frais : 2.50€ • Attente : 1 Heure</p>
             </a>
          </div>
-         {# {% endif %}  #}
+          {% endif %}  
         {% endfor %}
 
         
