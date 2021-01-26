@@ -43,9 +43,9 @@
         </div>
         <div class="card-body">
             <ul class="pl-0">
-                <li>Sous Total des achats : {{order.price - 2.5}} €</li>
+                <li>Sous Total des achats : {{order.price - 5}} € </li>
                 <li>Frais de livraison : 2.50 €</li>
-                <li>Montant Total : {{order.price}} €</li>
+                <li>Montant Total : {{order.price - 2.50}} €</li>
             </ul>
             <a href="{{ path('payment') }}" style="background-color:#009879;color:white;" class="btn btn-command">Passer la commande</a>
         </div>

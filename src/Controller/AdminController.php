@@ -69,6 +69,7 @@ class AdminController extends AbstractController
      */
     public function users(UserClientRepository $userClientRepository): Response
     {
+        
         return $this->render('user_client/index.html.twig', [
             'user_clients' => $userClientRepository->findAll(),
         ]);

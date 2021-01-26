@@ -22,7 +22,7 @@
                             <li class="list-group-item"><span>Produit {{loop.index}} : {{article.dish.nom}}</span></li>
                         {% endfor %}
                             <li class="list-group-item"><span>Etat : <a class="btn btn-secondary" href="{{path('order_update', {'id': order.id})}}">{{order.status}}</a></span></li>
-                            <li class="list-group-item"><span><td>Total : {{order.price}} €</td></span></li>
+                            <li class="list-group-item"><span><td>Total : {{order.price - 2.50 }} €</td></span></li>
                     </ul>
                  </div>
             </div>
