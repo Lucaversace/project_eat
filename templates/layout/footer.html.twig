@@ -7,9 +7,18 @@
             <div class="col-12 col-sm-6 col-md-2">
                 <h5>A propos</h5>
                 <ul>
+                {% if not app.user %}
                     <li><a href="{{ path('restorer_new') }}">Ajouter votre restaurant</a></li>
+                {% else %}
+                    <li><a href="#">Comment ajouter votre restaurant ?</a></li>
+                {% endif %}
+                {% if app.user and  app.user.roles[0] == "ROLE_RESTORER" %}
                     <li><a href="{{path('dish_new')}}">Ajouter un plat</a></li>
-                    <li><a href="#">Voir mes plats</a></li>
+                    <li><a href="{{path('dishs_restorer',{'id':app.user.id}) }}">Voir mes plats</a></li>
+                {% else %}
+                    <li><a href="#">Comment ajouter un plat ?</a></li>
+                    <li><a href="#">Comment voir mes plats ?</a></li>
+                {% endif %}
                 </ul>
             </div>
             <div class="col-12 col-sm-6 col-md-2">
