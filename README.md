@@ -10,7 +10,7 @@
 - Assurrez-vous d'avoir PHP installé sur votre machine
 - Assurrez-vous d'avoir un serveur MySQL
 
-Créer un fichier d'environnement de base de données à la racine du projet (.env.local)
+# Créer un fichier d'environnement de base de données à la racine du projet (.env.local)
 Ligne à insérer dans le fichier .env.local : DATABASE_URL=mysql://NomDuUSER:MotDePasse@Adresse:Port/project-eat?serverVersion=5.7
 
 # Installer les dépendances
