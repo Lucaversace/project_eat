@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Entity\Dish;
 use App\Entity\Note;
 use App\Entity\Order;
 use App\Entity\UserClient;
@@ -11,6 +12,7 @@ use App\Form\WalletType;
 use App\Repository\LineArticleRepository;
 use App\Repository\DishRepository;
 use App\Repository\UserClientRepository;
+use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -62,37 +64,43 @@ class UserClientController extends AbstractController
         
         $lineArticles = $lineArticleRepository->findDishByStatusAndUser($user);
 
-        $formulaires = [];
         $dishs = [];
-
-        $note = new Note();
         
         foreach($lineArticles as $lineArticle){
-
             $dish = $lineArticle->getDish();
             $dishs[] = $dish;
-
-            $form = $this->createForm(NoteType::class, $note);
-            $form->handleRequest($request);
-            $form1 = $form->createView();
-            $formulaires[] = $form1;
         }
-            if ($form->isSubmitted() && $form->isValid()) {
-                dd($form->get('dish')->getData());  
-                $note->setUserClient($user)
-                     ->setDish($form->get('dish')->getData())
-                ;
-
-                $this->getDoctrine()->getManager()->flush();
-                return $this->redirectToRoute('note_client');
-            }
-        
         return $this->render('user_client/notes.html.twig', [
-            'formulaires' => $formulaires,
             'lineArticles' => $lineArticles,
             'dishs' => $dishs
         ]);
     }
+    
+     /**
+     * @Route("/NoteUnPlat/{id}", name="noteUnPlat", methods={"GET", "POST"})
+     */
+    public function NoteunPlat(Dish $dish, Request $request,EntityManagerInterface $em): Response
+    {
+        $user = $this->getUser();
+        $note = new Note();
+        $form = $this->createForm(NoteType::class, $note);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $note->setUserClient($user)
+            ->setDish($dish);
+            $em->persist($note);
+            $length=sizeof($dish->getNotes());
+            $dish->setNote(($dish->getNote()*$length+$form->get('rate')->getData())/($length+1));
+            $em->flush();
+
+            return $this->redirectToRoute('note_client');
+        }
+        return $this->render('user_client/note.html.twig', [
+            'form' => $form->createView()
+        ]);
+    }
+
 
     /**
      * @Route("/Informations", name="user_client_edit", methods={"GET","POST"})

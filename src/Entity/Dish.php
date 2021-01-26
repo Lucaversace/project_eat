@@ -50,11 +50,6 @@ class Dish
     private $note;
 
     /**
-     * @ORM\Column(type="integer", nullable=true)
-     */
-    private $NbNote;
-
-    /**
      * @ORM\OneToMany(targetEntity=Note::class, mappedBy="dish", orphanRemoval=true)
      */
     private $notes;
@@ -138,18 +133,6 @@ class Dish
     public function setNote(?int $note): self
     {
         $this->note = $note;
-
-        return $this;
-    }
-
-    public function getNbNote(): ?int
-    {
-        return $this->NbNote;
-    }
-
-    public function setNbNote(?int $NbNote): self
-    {
-        $this->NbNote = $NbNote;
 
         return $this;
     }

@@ -1,0 +1,34 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    
+  <div class="text-center">
+        <h4 style="color: #212529;font-size: 45px; margin-top:60px">Noter mon plat</h4>
+    </div>
+    <hr class="modern-form__hr">
+
+
+{{ form_start(form) }}
+<div class="container modern-form">
+        <div class="modern-form__form-container">
+            <form> 
+                <div class="form-row" style="margin-top: 5px;">
+                    <div class="col">
+                    
+                    {{ form_row(form.rate,{'attr':{'min':0,'max':5,'step':1,'class':'form-control input input-tr','placeholder':'Note de 1 à 5 '},'label':' '}) }}
+                  </div>
+                </div>  
+
+                <div class="form-row">
+                    <div class="col text-center">   
+                      {{ form_row(form.submit,{'attr':{'class':'btn btn-primary submit-now'},'label':"Enregistrer"}) }}
+                    </div>
+                </div>
+            {{ form_rest(form) }}
+            </form>
+        </div>
+    </div>
+
+{{ form_end(form) }}
+
+{% endblock %}
