@@ -11,6 +11,7 @@ use App\Form\UserClientType;
 use App\Form\WalletType;
 use App\Repository\LineArticleRepository;
 use App\Repository\DishRepository;
+use App\Repository\NoteRepository;
 use App\Repository\UserClientRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -58,7 +59,7 @@ class UserClientController extends AbstractController
      /**
      * @Route("/MesNotes", name="note_client", methods={"GET", "POST"})
      */
-    public function myNotes(Request $request, LineArticleRepository $lineArticleRepository, DishRepository $dishRepository): Response
+    public function myNotes(Request $request, LineArticleRepository $lineArticleRepository, DishRepository $dishRepository, NoteRepository $noteRepository): Response
     {
         $user = $this->getUser();
         
@@ -68,7 +69,11 @@ class UserClientController extends AbstractController
         
         foreach($lineArticles as $lineArticle){
             $dish = $lineArticle->getDish();
-            $dishs[] = $dish;
+            $note = $noteRepository->findOneByDish($dish->getId());
+
+            if(!$note){
+                $dishs[] = $dish;
+            }
         }
         return $this->render('user_client/notes.html.twig', [
             'lineArticles' => $lineArticles,
