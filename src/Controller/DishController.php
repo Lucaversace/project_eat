@@ -87,7 +87,7 @@ class DishController extends AbstractController
             }
             $this->getDoctrine()->getManager()->flush();
 
-            return $this->redirectToRoute('accueil');
+            return $this->redirectToRoute('dishs_restorer');
         }
 
         return $this->render('dish/edit.html.twig', [

@@ -63,7 +63,7 @@ class IndexController extends AbstractController
             $em->persist($restorer);
             $em->flush();
 
-            return $this->redirectToRoute('accueil');
+            return $this->redirectToRoute('app_login');
         }
 
         return $this->render('restorer/new.html.twig', [
@@ -89,7 +89,7 @@ class IndexController extends AbstractController
             $userClient->setPassword($hash);
             $entityManager->flush();
 
-            return $this->redirectToRoute('accueil');
+            return $this->redirectToRoute('app_login');
         }
 
         return $this->render('user_client/new.html.twig', [

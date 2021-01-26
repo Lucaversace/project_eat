@@ -81,11 +81,11 @@ class RestorerController extends AbstractController
     }
 
     /**
-     * @Route("/Plats/{id}", name="dishs_restorer", methods={"GET"})
+     * @Route("/Plats/", name="dishs_restorer", methods={"GET"})
      */
-    public function plat(RestorerRepository $restorerRepository,$id): Response
+    public function plat(): Response
     {
-        $restorer = $restorerRepository->find($id);
+        $restorer = $this->getUser();
         $dishes = $restorer->getDishs();
         return $this->render('dish/index.html.twig', [
             'dishes' => $dishes,

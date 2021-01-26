@@ -169,7 +169,7 @@ class UserClientController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $this->getDoctrine()->getManager()->flush();
 
-            return $this->redirectToRoute('accueil');
+            return $this->redirectToRoute('cart_index');
         }
 
         return $this->render('user_client/edit_solde.html.twig', [
