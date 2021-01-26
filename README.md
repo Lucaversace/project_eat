@@ -1,5 +1,3 @@
-#TruEat By Lucas Bento-Versace & Victor Tollemer
-
 
 # Etapes de Mise en place :
 (Si vous souhaitez des explications sur les choix techniques, référez-vous au document envoyé avec le projet)
@@ -27,3 +25,6 @@ Ligne à insérer dans le fichier .env.local : DATABASE_URL=mysql://NomDuUSER:Mo
 6. php bin/console server:run
 
 
+
+
+#TruEat By Lucas Bento-Versace & Victor Tollemer
