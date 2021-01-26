@@ -62,14 +62,16 @@ class UserClientController extends AbstractController
     public function myNotes(Request $request, LineArticleRepository $lineArticleRepository, DishRepository $dishRepository, NoteRepository $noteRepository): Response
     {
         $user = $this->getUser();
-        
+
+        $Iduser = $user->getId(); 
+
         $lineArticles = $lineArticleRepository->findDishByStatusAndUser($user);
 
         $dishs = [];
         
         foreach($lineArticles as $lineArticle){
             $dish = $lineArticle->getDish();
-            $note = $noteRepository->findOneByDish($dish->getId());
+            $note = $noteRepository->findOneByDish($dish->getId(),$user);
 
             if(!$note){
                 $dishs[] = $dish;

@@ -1,12 +1,30 @@
 {% extends 'base.html.twig' %}
 
+{% block title %}Mes notes{% endblock %}
 {% block body %}
+     <div class="text-center">
+        <h4 style="color: #212529;font-size: 45px; margin-top:60px;">Noter les plats</h4>
+    </div>
+    <hr class="modern-form__hr" style="margin-bottom:50px;">
+
+    <div class="row" style="margin-right: 0px;margin-left: 0px;">
     
     {% for dish in dishs %}
-    <div class="container modern-form">
-            <div class="modern-form__form-container">
-               <a href="{{path('noteUnPlat',{'id':dish.id})}}"> Noter le {{dish.nom}} </a>
+
+        <div class="col d-flex justify-content-xl-center" style="border-width: 1px;border-color: rgb(0,0,0);height: 140px;width: 650px;margin-bottom: 30px;padding: 0px !important;">
+            <a href="{{path('noteUnPlat',{'id':dish.id})}}"  class="btn btn-primary" type="button" style="background: rgb(0, 152, 121);color: rgb(0,0,0);border-style: none;box-shadow: 0px 3px 5px rgba(0,0,0,0.2);"></a>
+            <div class="cadre" style="width: 312px;height: 140px;color: #212529;border: 1px solid rgba(0,0,0,0.12) ;">
+                <div class="d-xl-flex justify-content-xl-end" style="margin-top: 5px;">
+                    <p style="width: 300px;font-family: Roboto, sans-serif;margin: 0px;font-weight: bold;margin-left: 10px;">{{dish.nom}}</p>
+                </div>
+                <p style="width: 300px;font-family: Roboto, sans-serif;padding-top: 5px;padding-bottom: 5 px;margin-left: 10px;">{{dish.description}}<br></p>
             </div>
+            <div><img class="d-xl-flex" src={{ asset('uploads/' ~ dish.image) }} style="width: 200px;height: 140px;" alt={{dish.nom}}></div>
         </div>
+
+    {% else %}
+       <P> Il n'y a pas de plats à noter </p> 
     {% endfor %}
+
+    </div>
 {% endblock %}

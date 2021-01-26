@@ -19,7 +19,7 @@
                             <h1 style="font-family: Roboto, sans-serif;">{{order.restaurant.restaurantName}}</h1>
                         </li>
                         {% for article in order.lineArticle %}
-                            <li class="list-group-item"><span>Produit {{loop.index}} : {{article.dish.nom}}</span></li>
+                            <li class="list-group-item"><span>{{article.quantity}} x {{article.dish.nom}} : {{article.price}} €</span></li>
                         {% endfor %}
                             <li class="list-group-item"><span>Etat : <a class="btn btn-secondary" href="{{path('order_update', {'id': order.id})}}">{{order.status}}</a></span></li>
                             <li class="list-group-item"><span><td>Total : {{order.price - 2.50 }} €</td></span></li>

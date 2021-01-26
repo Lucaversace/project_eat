@@ -37,11 +37,12 @@ class NoteRepository extends ServiceEntityRepository
     */
 
     
-    public function findOneByDish($id): ?Note
+    public function findOneByDish($id,$Iduser): ?Note
     {
         return $this->createQueryBuilder('n')
-            ->where('n.dish = :id')
+            ->where('n.dish = :id and n.userClient = :Iduser ')
             ->setParameter('id', $id)
+            ->setParameter('Iduser', $Iduser)
             ->getQuery()
             ->getOneOrNullResult()
         ;
